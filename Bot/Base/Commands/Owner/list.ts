@@ -1,6 +1,5 @@
 import { Command } from 'discord-akairo'
-import { Message, TextChannel } from 'discord.js'
-import { Embeds } from 'discord-paginationembed'
+import { Message } from 'discord.js'
 
 export default class extends Command {
     public constructor() {
@@ -58,33 +57,13 @@ export default class extends Command {
                 return message.util?.send(embed2)
             } else if (inhibitors) {
                 return message.util?.send(embed3)
+            } else {
+                // I love ts :)
+                return undefined
             }
         } else {
-            let users = [this.client.ownerID]
-            if(!this.client.isOwner(message.author)) users.push(message.author.id)
-            
-            let paginator = new Embeds()
-            .setArray([embed1, embed2, embed3])
-            .setChannel(message.channel as TextChannel)
-            // @ts-ignore BRUH What's wrong with ts
-            .setAuthorizedUsers(users)
-            .setTitle(`${this.client.user?.tag}'s Modules`)
-            .setThumbnail(this.client.user!.displayAvatarURL({dynamic: true}))
-            .setColor(this.client.baseColor)
-            //.setDeleteOnTimeout(true)
-            .setNavigationEmojis({
-                back: '◀',
-                jump: '↗',
-                forward: '▶',
-                delete: '🗑'
-            })
-            .setDisabledNavigationEmojis(['delete', 'jump'])
-            .setFooter('')
-            .setPageIndicator('footer')
-            .setTimestamp()
-            .setTimeout(2 * 60 * 1000)
-
-            return await paginator.build()
+            // @ts-ignore Why is it not callable smh it works
+            return message.util?.send(this.client.util.embed().addField(`Invalid Input`, `You need to provide one of these flags:\n\`--commands\`\n\`--listeners\`\n\`--inhibitors\`\nExample: \`${this.handler.prefix(message)}list --commands\``))
         }
     }
 }
