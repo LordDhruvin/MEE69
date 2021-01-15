@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 
 let Data = new Map()
 
-export default class StarlistAPICacher extends EventEmitter {//will emit stuff using this later
+export default class StarlistAPICacher extends EventEmitter {
     public constructor(key: string, cachingTime: number = 5 * 60 * 1000) {
         super()
         this._starlist_key = key
