@@ -24,7 +24,7 @@ const client = new MageClient()
 
 /**
  * Note: If key is not found, this will return null and the other checks for everthing that uses this data * * * *
- * * * * will just send an output to the user stating that this functionality has not been setup by the bot owner.
+ * * * * will just return an undefined output (nothing will happen really) * * * * * * * * * * * * * * * * * * * *
  */
 var starlist
 

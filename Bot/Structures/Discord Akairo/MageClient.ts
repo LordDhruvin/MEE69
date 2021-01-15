@@ -101,7 +101,10 @@ export default class MageClient extends AkairoClient {
         }, {
             partials: [
                 'MESSAGE',
-                'REACTION'
+                'REACTION',
+                'USER',
+                'CHANNEL',
+                'GUILD_MEMBER'
             ],
             presence: {
                 afk: true
