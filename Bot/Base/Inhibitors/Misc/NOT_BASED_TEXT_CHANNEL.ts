@@ -3,14 +3,13 @@ import { Message } from "discord.js";
 
 export default class extends Inhibitor {
     public constructor() {
-        super('inhibitor_misc_not_text_channel', {
-            reason: 'NOT_TEXT_CHANNEL',
+        super('inhibitor_misc_not_text_based_channel', {
+            reason: 'NOT_TEXT_BASED_CHANNEL',
             priority: 10
         })
     }
 
     public async exec(message: Message) {
-        if(!message.guild) return false
-        return !(message.channel.type === 'text')
+        return !(message.channel.isText())
     }
 }
