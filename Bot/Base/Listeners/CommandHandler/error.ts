@@ -1,6 +1,8 @@
 import { Command } from "discord-akairo";
 import { Listener } from "discord-akairo";
+import { TextChannel } from "discord.js";
 import { Message } from "discord.js";
+import config from '../../../Data/config'
 
 export default class extends Listener {
     public constructor() {
@@ -11,9 +13,22 @@ export default class extends Listener {
     }
 
     public async exec(error: Error, message: Message, command: Command) {
-        this.client.logger.error(error)
+
         if(this.client.isOwner(message.author)){
-            message.util?.send(this.client.util.embed().addField(`Error`, `\`\`\`prolog\n${error}\`\`\``).addField(`Command`, `${command.id}`).setFooter(message), { split: true })
+            message.channel.send(this.client.util.embed().addField(`Error`, `\`\`\`prolog\n${error.message}\n\`\`\``).addField(`Command`, `\`${command.id}\``))
+        } else {
+            let embed = this.client.util.embed()
+            .setTitle(`Error`)
+            .addField(`${error.name}`, `\`\`\`prolog\n${error.message}\n\`\`\``, true)
+            .addField(`Command`, `\`${command.id}\``, true)
+            .addField(`\u200b`, `Message: \`${message.content}\`\nAuthor: ${message.author}\`${message.author.id}\`\nGuild: ${message.guild ?  `${message.guild.name} \`${message.guild.id}\`` : `DMs`}`)
+
+            let chn = this.client.channels.cache.get(config.bot.logchannels.error) as TextChannel
+            if(!chn) chn = await this.client.channels.fetch(config.bot.logchannels.error) as TextChannel
+
+            chn.send(embed)
+
         }
+        this.client.logger.error(error)
     }
 }
