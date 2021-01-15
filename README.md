@@ -7,7 +7,10 @@ Documentation
 =============
 * [Overview](#overview)
 * [Installation](#installation)
-  * [Requirements](#requirements)
+  * [Heroku](#heroku)
+  * [Native PC](#native-pc)
+    * [Requirements](#requirements)
+    * [Running the bot](#running-the-bot)
   * [Changing Files](#creating-and-changing-files)
   * [Getting API Keys](#getting-api-keys)
 * [Usage](#usage)
@@ -23,6 +26,27 @@ Installation
 
 Will fill this out later.
 
+### Heroku
+
+Hosting on heroku is very easy. All you have to do is fork this repository, make changes to [safe-config.ts](Bot/Data/safe-config.ts "Change these values to fit your needs.")
+1. go to [Heroku](https://heroku.com "Go to Heroku")
+2. create an application
+3. Add your fork as the repository (link your github if not done yet)
+4. add environment varaibles like this
+ - TOKEN => your discord-bot's token
+ - USER_DB => your mongodb atlas (or even any other host) url which you will be using to connect to user database
+ - GUILD_DB => your mongodb atlas (or even any other host) url which you will be using to connect to guild database
+ - BS_API_KEY => your brawl stars api key [see this](#getting-api-keys)
+ - COC_API_KEY => your clash of clasn api key [see this](#getting-api-keys)
+ - CR_API_KEY => your clash royale api key [see this](#getting-api-keys)
+ - STARLIST_KEY => your starlist api key (optional as private api)
+ - GITHUB_API_KEY => your github api key [see this](#getting-api-keys)
+5. Change the dyno worker thing to worker (it is web by default)
+ 
+And your bot should be online!
+
+### Native PC
+
 ### Requirements
 
 You will need:
@@ -32,6 +56,13 @@ You might want:
 * [Good Text Editor](https://code.visualstudio.com "Suggested: Visual Studio Code")
 * [Git](https://git.com)
 
+### Running the bot
+
+Run `npm i` in your terminal (Node js will install all the dependencies.)
+
+Then,
+Run `npm run start` in your terminal
+
 ### Creating and Changing Files
 
 Creating Files:
@@ -39,7 +70,8 @@ Creating Files:
 
 Changing Files
 - Suggested:
-  * [blacklist.ts](Bot/Data/blacklist.ts "The file with blacklisted users.\nWarning: blacklisted users will not be able to use the bot.")
+  * [blacklist.ts](Bot/Data/blacklist.ts "The file with blacklisted users.")
+  * [safe-config.ts](Bot/Data/safe-config.ts "This file has non-confidential data")
 
 - Not Suggested:
   * [config.ts](Bot/Data/config.ts "configuration file") This file has been setup in a special way that it can work on your host whilst still being in that same Open-Source repository making it easy to apply changes.
@@ -58,9 +90,11 @@ Supercell:
 GitHub:
 * [GitHub API Key](https://developer.github.com)
 
-### Running the bot
+Usage
+-----
 
-Run `npm run start` in your terminal
+You can use this bot for any purpose you want except for if it breaks TOS of discord, supercell, github etc.
+Do not use this bot for any illegal purposes.
 
 Contributors
 ------------

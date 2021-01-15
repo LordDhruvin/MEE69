@@ -20,11 +20,11 @@ export default {
     keys: {
         supercell: {
             bs: process.env.BS_API_KEY || devconfig.keys.supercell.bs,
-            coc: process.env.BS_API_KEY || devconfig.keys.supercell.coc,
-            cr: process.env.BS_API_KEY || devconfig.keys.supercell.cr
+            coc: process.env.COC_API_KEY || devconfig.keys.supercell.coc,
+            cr: process.env.CR_API_KEY || devconfig.keys.supercell.cr
         },
         starlist: process.env.STARLIST_API_KEY || devconfig.keys.starlist,
-        github: process.env.GITHUB_APU_KEY || devconfig.keys.github
+        github: process.env.GITHUB_API_KEY || devconfig.keys.github
     }
 }
 
