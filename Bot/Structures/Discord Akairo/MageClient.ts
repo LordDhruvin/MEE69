@@ -72,7 +72,7 @@ export default class MageClient extends AkairoClient {
                     this.text.CLIENT.PROMPT.ENDED(message)
                 },
                 cancel: this.text.CLIENT.PROMPT.CANCEL,
-                time: 3*1000,
+                time: 3 * 1000,
                 retries: 3
             },
             otherwise: ''
