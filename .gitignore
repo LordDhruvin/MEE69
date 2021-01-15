@@ -1,0 +1,18 @@
+# Files not to be uploaded on GitHub
+
+# Most important
+config-dev.ts
+
+# Unnecessary
+node_modules
+package-lock.json
+Mage
+
+# Useless
+Cache
+test
+test.ts
+test.js
+testing.js
+testing.ts
+testing

@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "lib": ["ES2020"],
+      "target": "es2020",
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "strict": true,
+      "skipLibCheck": true,
+      "noImplicitAny": true,
+      "strictBindCallApply": true,
+      "strictFunctionTypes": true,
+      "strictPropertyInitialization": true,
+      "alwaysStrict": true,
+      "noUnusedLocals": true,
+      "noImplicitReturns": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "pretty": true,
+      "forceConsistentCasingInFileNames": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "sourceMap": true,
+      "rootDir": "Bot",
+      "outDir": "Mage",
+      "resolveJsonModule": true,
+    },
+    "exclude": [
+      "node_modules"
+    ]
+}
