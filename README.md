@@ -52,6 +52,7 @@ Supercell:
 1. [Brawl Stars](https://developer.brawlstars.com/ "Official Brawl Stars API")
 2. [Clash Royale](https://developer.clashroyale.com/ "Official Royale API")
 3. [Clash of Clans](https://developer.clashofclans.com/ "Official Clash of Clans API")
+
 **Note:** I have used The [Royale API proxy](https://docs.royaleapi.com/#/proxy) and hence you would want to add `128.128.128.128` as an whitelisted IP Address in the above keys in order for this to function properly.
 
 GitHub:
