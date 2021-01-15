@@ -31,6 +31,9 @@ var starlist
 if (config.keys.starlist) {
     starlist = new StarlistAPICacher(config.keys.starlist)
     starlist.init()
+    starlist.on('ready', (data: any) => {
+        client.logger.success(`Size: ${data.size}\nValues: ${data.values}`, 'Star List API Cacher')
+    })
 }
 export default {
     client: client,
