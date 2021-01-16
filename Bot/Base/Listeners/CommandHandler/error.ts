@@ -22,6 +22,7 @@ export default class extends Listener {
             .addField(`${error.name}`, `\`\`\`prolog\n${error.message}\n\`\`\``, true)
             .addField(`Command`, `\`${command.id}\``, true)
             .addField(`\u200b`, `Message: \`${message.content}\`\nAuthor: ${message.author}\`${message.author.id}\`\nGuild: ${message.guild ?  `${message.guild.name} \`${message.guild.id}\`` : `DMs`}`)
+            .addField(`Stacked Error`, `\`\`\`prolog\n${error.stack}\n\`\`\``)
 
             let chn = this.client.channels.cache.get(config.bot.logchannels.error) as TextChannel
             if(!chn) chn = await this.client.channels.fetch(config.bot.logchannels.error) as TextChannel
