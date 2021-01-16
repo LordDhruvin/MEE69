@@ -23,20 +23,21 @@ export default class extends Command {
     public async exec(message: Message, { command }: { command: Command}) {
         // @ts-ignore I love ts :)
         let prefix: string = this.handler.prefix(message) || this.handler.prefix
+        let embed
+        if(command) {
+            let guildOnly = 'No'
+            if(command.channel) {
+                if(command.channel === 'guild') guildOnly = 'Yes'
+            }
 
-        let guildOnly = 'No'
-        if(command.channel) {
-            if(command.channel === 'guild') guildOnly = 'Yes'
+            embed = this.client.util.embed()
+            .setColor(this.client.baseColor)
+            .setTitle(`\`${prefix}${command.aliases[0]}${command.description.usage ? ` ${command.description.usage}` : ''}\``)
+            .addField(`Description`, `\`${command.description.short || 'No Description Given!'}\``)
+            if(command.cooldown) embed.addField(`Cooldown`, `\`${ms(command.cooldown)}\``, true)
+            .addField(`Category`, `\`${command.category}\``)
+            .addField(`Guild Only`, `${guildOnly}`)
         }
-
-        let embed = this.client.util.embed()
-        .setColor(this.client.baseColor)
-        .setTitle(`\`${prefix}${command.aliases[0]}${command.description.usage ? ` ${command.description.usage}` : ''}\``)
-        .addField(`Description`, `\`${command.description.short || 'No Description Given!'}\``)
-        if(command.cooldown) embed.addField(`Cooldown`, `\`${ms(command.cooldown)}\``, true)
-        .addField(`Category`, `\`${command.category}\``)
-        .addField(`Guild Only`, `${guildOnly}`)
-
         let embed2 = this.client.util.embed()
         .setTitle(`${this.client.user?.username}'s Commands \`[ ${this.handler.modules.size} ]\``)
         .setColor(this.client.baseColor)
