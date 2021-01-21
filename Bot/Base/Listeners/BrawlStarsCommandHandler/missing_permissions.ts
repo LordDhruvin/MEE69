@@ -5,8 +5,8 @@ import permissions from "../../../Data/permissions";
 
 export default class extends Listener {
     public constructor() {
-        super('listener_command_handler_missing_permissions', {
-            emitter: 'CommandHandler',
+        super('listener_brawl_stars_command_handler_missing_permissions', {
+            emitter: 'BrawlStarsCommandHandler',
             event: 'missingpermissions'
         })
     }
