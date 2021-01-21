@@ -2,11 +2,12 @@ export default {
     bot: {
         owners: ['767992139850055702'],
         prefix: 'wtf',
-        color: '#0000ff',
+        bsprefix: 'bs',
+        color: 0x0000ff,
         logchannels: {
-            error: '',
-            command: '',
-            other: ''
+            error: '791146760654684262',
+            command: '793728034799747142',
+            other: '791146805857222686'
         }
     }
 

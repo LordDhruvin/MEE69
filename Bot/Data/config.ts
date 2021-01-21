@@ -6,6 +6,7 @@ export default {
         token: process.env.TOKEN || devconfig.bot.token,
         owners: devconfig.bot.owners || safeconfig.bot.owners,
         prefix: devconfig.bot.prefix || safeconfig.bot.prefix,
+        bsprefix: devconfig.bot.bsprefix || safeconfig.bot.bsprefix,
         color: devconfig.bot.color || safeconfig.bot.color,
         logchannels: {
             error: devconfig.bot.logchannels.error || safeconfig.bot.logchannels.error,

@@ -91,7 +91,7 @@ export default class MageLogger {
      * @param {string} body body
      * @param {string} title Optional title
      */
-    public log(type: string, body: string, title: string) {
+    public log(type: string, body: string, title?: string) {
 
         switch (type.toLowerCase()) {
             case 'command':

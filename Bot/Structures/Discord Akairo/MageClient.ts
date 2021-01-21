@@ -32,11 +32,12 @@ require('../Mongoose/Index/UserDataBaseConnection')
 declare module 'discord-akairo' {
     interface AkairoClient {
         CommandHandler: CommandHandler
+        BrawlStarsCommandHandler: CommandHandler
         ListenerHandler: ListenerHandler
         InhibitorHandler: InhibitorHandler
         logger: MageLogger
         text: typeof TEXT
-        baseColor: string
+        baseColor: number|string
     }
 }
 
@@ -50,6 +51,40 @@ export default class MageClient extends AkairoClient {
         prefix: //(message) => {
             config.bot.prefix,
             //message.guild ? this.gdb.get(message.guild.id, prefix, config.bot.prefix) : config.bot.prefix
+        //},
+        aliasReplacement: /-/g,
+        allowMention: true,
+        handleEdits: true,
+        commandUtil: true,
+        defaultCooldown: 5e3,
+        ignoreCooldown: this.ownerID,
+        ignorePermissions: this.ownerID,
+        automateCategories: true,
+        argumentDefaults: {
+            prompt: {
+                modifyStart: (_: Message, str: string) => {
+                    this.text.CLIENT.PROMPT.START(str)
+                },
+                modifyRetry: (_: Message, str: string) => {
+                    this.text.CLIENT.PROMPT.RETRY(str)
+                },
+                timeout: this.text.CLIENT.PROMPT.TIMEOUT,
+                ended: (message: Message) => {
+                    this.text.CLIENT.PROMPT.ENDED(message)
+                },
+                cancel: this.text.CLIENT.PROMPT.CANCEL,
+                time: 3 * 10 * 1000,
+                retries: 3
+            },
+            otherwise: ''
+        }
+    })
+
+    public BrawlStarsCommandHandler: CommandHandler = new CommandHandler(this, {
+        directory: path.join(__dirname, '..', '..', 'Base', 'Brawl Stars Commands'),
+        prefix: //(message) => {
+            config.bot.bsprefix,
+            //message.guild ? this.gdb.get(message.guild.id, bsprefix, config.bot.bsprefix) : config.bot.bsprefix
         //},
         aliasReplacement: /-/g,
         allowMention: true,
@@ -137,15 +172,18 @@ export default class MageClient extends AkairoClient {
         this.ListenerHandler.setEmitters({
             Bot: this,
             CommandHandler: this.CommandHandler,
+            BrawlStarsCommandHandler: this.BrawlStarsCommandHandler,
             ListenerHandler: this.ListenerHandler,
             process: process
         }),
         this.CommandHandler.loadAll(),
         this.logger.log('Command', 'All commands loaded', 'Command Handler'),
+        this.BrawlStarsCommandHandler.loadAll()
+        this.logger.log('Command', 'All Brawl Stars Commands loaded', 'Brawl Stars Command Handler')
         this.ListenerHandler.loadAll(),
         this.logger.log('Listener', 'All listeners Loaded', 'Listener Handler'),
         this.InhibitorHandler.loadAll(),
-        this.logger.log('Inhibitor', 'All Inhibitors Loaded', 'Inhibitor Hnadler')
+        this.logger.log('Inhibitor', 'All Inhibitors Loaded', 'Inhibitor Handler')
         //await this.udb.init()
         //await this.gdb.init()
     }

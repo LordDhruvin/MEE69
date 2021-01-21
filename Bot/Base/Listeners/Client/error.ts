@@ -17,7 +17,7 @@ export default class extends Listener {
         .setTitle(`Error`)
         .addField(`${error.name}`, `\`\`\`prolog\n${error.message}\n\`\`\``)
         .addField(`Stacked Error`, `\`\`\`prolog\n${error.stack}\`\`\``)
-
+        .setColor(0xff0000)
         let chn = this.client.channels.cache.get(config.bot.logchannels.error) as TextChannel
         if(!chn) try { chn = await this.client.channels.fetch(config.bot.logchannels.error) as TextChannel } catch (err) {}
 

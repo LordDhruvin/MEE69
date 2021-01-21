@@ -4,7 +4,7 @@ import index from '../../../index'
 
 export default class extends Command {
     public constructor() {
-        super('command_brawl_stars_events', {
+        super('brawl_command_information_events', {
             aliases: ['events']
         })
     }
@@ -15,13 +15,13 @@ export default class extends Command {
 
         //Means it isn't cached yet.
         if(!index.starlistapicache.is_ready) return message.util?.send(`Hey, The api utility for this command is not ready yet.\nTry again in a few minutes.`)
-        
+        let embed = this.client.util.embed()
+        .setFooter(`Information provided by StarList ❤️`)
         //The actual needed data
         let events = index.starlistapicache?.data.get('events')
-
-        //Needs work. IDK what is that json and hence i can't do rn + i bet i will need a paginator
-        let embed = this.client.util.embed()
-        .setDescription(events)
+        for(let event of events.active) {
+            embed.addField(`${event.map.name}`, `[Map Link](${event.map.link})\n[${event.map.gameMode.name}](${event.map.gameMode.link})`)
+        }
 
         return message.util?.send(embed)
     }

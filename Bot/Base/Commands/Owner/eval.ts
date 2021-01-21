@@ -56,9 +56,17 @@ export default class extends Command {
             if(typeof evalled !== 'string') {
                 evalled = require('util').inspect(evalled)
             }
-            message.util!.send(`\`\`\`js\n${this.clean(evalled)}\`\`\``, { split: true })
+            message.util!.send(`\`\`\`js\n${this.clean(evalled)}\`\`\``, { split: {
+                maxLength: 1980,
+                prepend: '```js\n',
+                append: '\n```'
+            } })
         } catch (err) {
-            message.util!.send(`**Error:**\`\`\`prolog\n${this.clean(err)}\`\`\``, { split: true })
+            message.util!.send(`**Error:**\`\`\`prolog\n${this.clean(err)}\`\`\``, { split: {
+                maxLength: 1980,
+                prepend: '```js\n',
+                append: '\n```'
+            } })
         }
     }
 }

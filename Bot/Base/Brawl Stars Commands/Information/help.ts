@@ -4,7 +4,7 @@ import ms from "ms";
 
 export default class extends Command {
     public constructor() {
-        super('command_utility_help', {
+        super('brawl_command_infomation_help', {
             aliases: ['help'],
             description: {
                 short: 'Did you just use help command on help command itself?',
