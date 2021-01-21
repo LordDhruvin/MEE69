@@ -10,14 +10,14 @@ export default class extends Command {
             description: {
                 short: 'Evaluate some code',
                 usage: '< Code >',
-                visible: false
+                hidden: true
             },
             args: [
                 {
                     id: 'code',
                     type: 'string',
                     prompt: {
-                        start: (message: Message) => `${message.author}, What to evaluate?`
+                        start: `What to evaluate?`
                     },
                     match: 'content'
                 },

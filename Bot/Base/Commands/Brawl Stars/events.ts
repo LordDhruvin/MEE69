@@ -4,7 +4,9 @@ import index from '../../../index'
 
 export default class extends Command {
     public constructor() {
-        super('command_brawl_stars_events', {})
+        super('command_brawl_stars_events', {
+            aliases: ['events']
+        })
     }
 
     public async exec(message: Message) {

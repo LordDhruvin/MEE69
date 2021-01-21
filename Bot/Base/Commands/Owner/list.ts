@@ -8,7 +8,7 @@ export default class extends Command {
             ownerOnly: true,
             description: {
                 short: 'Lists all the commands, listeners and inhibitors',
-                visible: false
+                hidden: true
             },
             args: [
                 {
@@ -62,8 +62,7 @@ export default class extends Command {
                 return undefined
             }
         } else {
-            // @ts-ignore Why is it not callable smh it works
-            return message.util?.send(this.client.util.embed().addField(`Invalid Input`, `You need to provide one of these flags:\n\`--commands\`\n\`--listeners\`\n\`--inhibitors\`\nExample: \`${this.handler.prefix(message)}list --commands\``))
+            return message.util?.send(this.client.util.embed().setColor(this.client.baseColor).addField(`Invalid Input`, `You need to provide one of these flags:\n\`--commands\`\n\`--listeners\`\n\`--inhibitors\`\nExample: \`${this.handler.prefix/*(message)*/}list --commands\``))
         }
     }
 }

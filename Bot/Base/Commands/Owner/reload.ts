@@ -11,7 +11,7 @@ export default class extends Command {
             ownerOnly: true,
             description: {
                 short: 'Reload Something or everything',
-                visible: false,
+                hidden: true,
                 usage: '[ Command | Inhibitor | Listener ]'
             },
             args: [
