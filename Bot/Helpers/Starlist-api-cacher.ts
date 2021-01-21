@@ -61,9 +61,14 @@ export default class StarlistAPICacher extends EventEmitter {
 
         await this._sleep(5 * 1000)
 
+        if(!this.is_ready) {
+            this.is_ready = true
+            this.emit('ready', this.data)
+        }
+
         await this._sleep(this._cachingTime)
 
-        this._cacher
+        this._cacher()
         if(!this.is_ready) {
             this.is_ready = true
             this.emit('ready', this.data)
