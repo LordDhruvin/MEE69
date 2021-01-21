@@ -96,17 +96,11 @@ export default class MageClient extends AkairoClient {
         automateCategories: true,
         argumentDefaults: {
             prompt: {
-                modifyStart: (_: Message, str: string) => {
-                    this.text.CLIENT.PROMPT.START(str)
-                },
-                modifyRetry: (_: Message, str: string) => {
-                    this.text.CLIENT.PROMPT.RETRY(str)
-                },
-                timeout: this.text.CLIENT.PROMPT.TIMEOUT,
-                ended: (message: Message) => {
-                    this.text.CLIENT.PROMPT.ENDED(message)
-                },
-                cancel: this.text.CLIENT.PROMPT.CANCEL,
+                modifyStart: (_: Message, str: string) => `${str}\n\nType \`cancel\` to cancel command`,
+                modifyRetry: (_: Message, str: string) => `${str}\n\nType \`cancel\` to cancel command`,
+                timeout: `You took so long that the command got cancelled.`,
+                ended: (message: Message) => `${message.author}, you failed too many times.\nThe command has been cancelled`,
+                cancel: `The command has been cancelled.`,
                 time: 3 * 10 * 1000,
                 retries: 3
             },
