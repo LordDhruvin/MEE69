@@ -163,6 +163,7 @@ export default class MageClient extends AkairoClient {
     private async _init() {
         this.CommandHandler.useListenerHandler(this.ListenerHandler),
         this.CommandHandler.useInhibitorHandler(this.InhibitorHandler),
+        this.BrawlStarsCommandHandler.useInhibitorHandler(this.InhibitorHandler),
         this.ListenerHandler.setEmitters({
             Bot: this,
             CommandHandler: this.CommandHandler,
