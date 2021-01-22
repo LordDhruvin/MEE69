@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import index from '../../../index';
+import emojis from '../../../Data/emojis';
 
 export default class extends Command {
 	public constructor() {
@@ -39,7 +40,13 @@ export default class extends Command {
 
 		let embed = this.client.util
 			.embed()
-			.setAuthor(`${brawler.name}`, brawler['imageUrl3'], brawler.link)
+			.setAuthor(
+				`${brawler.name}`,
+				brawler['imageUrl3'],
+				brawler.link.startWith('/')
+					? `${brawler.link}?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+					: `${brawler.link}/?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+			)
 			.setDescription(`\`\`\`\n${brawler.description}\n\`\`\``)
 			.addField(
 				`Additional Information`,
@@ -50,7 +57,7 @@ export default class extends Command {
 				}\n**Class:** ${brawler.class.name}\n`
 			)
 			.addField(
-				`Gadgets`,
+				`${emojis.bsem2.Gadget}Gadgets`,
 				`${brawler.gadgets
 					.map(
 						(g: any) =>
@@ -59,7 +66,7 @@ export default class extends Command {
 					.join(`\n\n`)}`
 			)
 			.addField(
-				`Star Powers`,
+				`${emojis.bsem2.StarPower}Star Powers`,
 				`${brawler.starPowers
 					.map(
 						(s: any) =>

@@ -18,12 +18,17 @@ export default class extends Command {
 					prompt: {
 						start: `What to evaluate?`,
 					},
-					match: 'content',
+					match: 'rest',
 				},
 				{
 					id: 'unsecure',
 					match: 'flag',
 					flag: '--unsecure', //Needs work
+				},
+				{
+					id: 'asynchronous',
+					match: 'flag',
+					flag: '--async',
 				},
 			],
 		});

@@ -1,3 +1,5 @@
+import emojis from '../Data/emojis';
+
 /**
  * Get progress bar in ascii form
  * @param current Current progress
@@ -15,6 +17,14 @@ function getProgressBar(current: number, maximum: number, size = 10) {
 	return `${completed}${remaining}`;
 }
 
+/**
+ * @param brawler Brawler
+ */
+function getBrawlerEmote(brawler: string) {
+	return emojis.bsem1[brawler] || emojis.other[404];
+}
+
 export default {
 	getProgressBar,
+	getBrawlerEmote,
 };

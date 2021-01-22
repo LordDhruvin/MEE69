@@ -31,9 +31,9 @@ var starlist;
 if (config.keys.starlist) {
 	starlist = new StarlistAPICacher(config.keys.starlist);
 	starlist.init();
-	starlist.on('ready', (data: any) => {
+	starlist.on('ready', (data: Map<any, any>) => {
 		client.logger.success(
-			`Size: ${data.size}\nValues: ${data.values}`,
+			`Size: ${data.size}\nValues: ${data.keys()}`,
 			'Star List API Cacher'
 		);
 	});

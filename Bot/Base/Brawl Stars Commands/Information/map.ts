@@ -35,9 +35,21 @@ export default class extends Command {
 			);
 		let embed = this.client.util
 			.embed()
-			.setAuthor(`${map.name}`, map.gameMode.imageUrl, map.link)
+			.setAuthor(
+				`${map.name}`,
+				map.gameMode.imageUrl,
+				map.link.startWith('/')
+					? `${map.link}?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+					: `${map.link}/?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+			)
 			.setDescription(
-				`**Gamemode:** [${map.gameMode.name}](${map.gameMode.link})\n**Environment:** [${map.environment.name}](${map.environment.imageUrl})`
+				`**Gamemode:** [${map.gameMode.name}](${
+					map.gameMode.link.startWith('/')
+						? `${map.gameMode.link}?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+						: `${map.gameMode.link}/?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+				})\n**Environment:** [${map.environment.name}](${
+					map.environment.imageUrl
+				})`
 			)
 			.setImage(`${map.imageUrl}`)
 			.setColor(map.gameMode.color)
