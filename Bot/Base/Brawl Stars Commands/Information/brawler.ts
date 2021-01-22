@@ -43,9 +43,7 @@ export default class extends Command {
 			.setAuthor(
 				`${brawler.name}`,
 				brawler['imageUrl3'],
-				brawler.link.startWith('/')
-					? `${brawler.link}?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
-					: `${brawler.link}/?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+				`${brawler.link}/?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
 			)
 			.setDescription(`\`\`\`\n${brawler.description}\n\`\`\``)
 			.addField(

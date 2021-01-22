@@ -1,7 +1,8 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
+import ms from 'ms';
 import index from '../../../index';
-import moment from 'moment';
+
 
 export default class extends Command {
 	public constructor() {
@@ -27,19 +28,16 @@ export default class extends Command {
 				.setFooter(`Information provided by StarList ❤️`)
 				.setAuthor(
 					`${event.map.name}`,
-					event.map.gameMode.imageUrl,
-					event.map.link.startWith('/') ? `${event.map.link}?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot` : `${event.map.link}/?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
+					event.map.gameMode.imageUrl, `${event.map.link}/?utm_source=discord&utm_campaign=Dhruvin%27s%20Bot`
 				)
 				.setDescription(
-					`**Ends in:** ${moment(
-						new Date(event.endTime)
-					)}\n**Environment:** ${event.map.environment.name}`
+					`**Ends in:** ${ms(new Date(event.endTime).getTime() - new Date().getTime(), { long: true })}\n**Environment:** ${event.map.environment.name}`
 				)
 				.setThumbnail(event.map.imageUrl)
 				.setImage(event.map.environment.imageUrl)
 				.setColor(event.map.gameMode.color);
 			message.util?.send(embed);
-		}
+		}//Todo make a --upcoming flag and replace the active with upcoming.
 
 		return true;
 	}
