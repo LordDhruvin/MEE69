@@ -2,6 +2,7 @@ Mage
 ====
 
 An Open Source discord bot fulfil my needs.
+[Help regarding this can be asked here](https://dsc.gg/dhruvin)
 
 Documentation
 =============

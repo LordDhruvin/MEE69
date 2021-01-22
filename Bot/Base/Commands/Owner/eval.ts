@@ -1,6 +1,5 @@
 import { Message } from "discord.js";
 import { Command } from 'discord-akairo'
-import { Util } from "discord.js";
 
 export default class extends Command {
     public constructor() {
@@ -24,7 +23,7 @@ export default class extends Command {
                 {
                     id: 'unsecure',
                     match: 'flag',
-                    flag: '*unsecure'//Needs work
+                    flag: '--unsecure'//Needs work
                 }
             ]
         })
@@ -45,8 +44,6 @@ export default class extends Command {
 
     public async exec(message: Message, { code, unsecure }: { code: string, unsecure: string}) {
 
-        code = Util.escapeMarkdown(code)
-        
         if(unsecure) {
             console.log(`Unsecure Evaluation Requested`)
         }
