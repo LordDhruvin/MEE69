@@ -16,27 +16,30 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import MageClient from './Structures/Discord Akairo/MageClient'
-import StarlistAPICacher from './Helpers/Starlist-api-cacher'
-import config from './Data/config'
+import MageClient from './Structures/Discord Akairo/MageClient';
+import StarlistAPICacher from './Helpers/Starlist-api-cacher';
+import config from './Data/config';
 
-const client = new MageClient()
+const client = new MageClient();
 
 /**
  * Note: If key is not found, this will return null and the other checks for everthing that uses this data * * * *
  * * * * will just return an undefined output (nothing will happen really) * * * * * * * * * * * * * * * * * * * *
  */
-var starlist
+var starlist;
 
 if (config.keys.starlist) {
-    starlist = new StarlistAPICacher(config.keys.starlist)
-    starlist.init()
-    starlist.on('ready', (data: any) => {
-        client.logger.success(`Size: ${data.size}\nValues: ${data.values}`, 'Star List API Cacher')
-    })
+	starlist = new StarlistAPICacher(config.keys.starlist);
+	starlist.init();
+	starlist.on('ready', (data: any) => {
+		client.logger.success(
+			`Size: ${data.size}\nValues: ${data.values}`,
+			'Star List API Cacher'
+		);
+	});
 }
 export default {
-    client: client,
-    starlistapicache: starlist
-}
-client.start()
+	client: client,
+	starlistapicache: starlist,
+};
+client.start();

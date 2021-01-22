@@ -6,15 +6,15 @@
  * @returns progress bar in string-ascii form
  */
 function getProgressBar(current: number, maximum: number, size = 10) {
-    let percent = current / maximum
-    let progressed = Math.round(size * percent)
-    if (progressed === 0) return '▱'.repeat(size)
-    let remain = size - progressed
-    let completed = '▰'.repeat(progressed)
-    let remaining = '▱'.repeat(remain)
-    return `${completed}${remaining}`
+	let percent = current / maximum;
+	let progressed = Math.round(size * percent);
+	if (progressed === 0) return '▱'.repeat(size);
+	let remain = size - progressed;
+	let completed = '▰'.repeat(progressed);
+	let remaining = '▱'.repeat(remain);
+	return `${completed}${remaining}`;
 }
 
 export default {
-    getProgressBar
-}
+	getProgressBar,
+};

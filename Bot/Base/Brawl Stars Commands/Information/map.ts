@@ -1,38 +1,47 @@
-import { Command } from "discord-akairo";
-import { Message } from "discord.js";
-import index from '../../../index'
+import { Command } from 'discord-akairo';
+import { Message } from 'discord.js';
+import index from '../../../index';
 
 export default class extends Command {
-    public constructor() {
-        super('brawl_command_infomation_map', {
-            aliases: ['map'],
-            args: [
-                {
-                    id: 'mapname',
-                    type: 'string',
-                    match: 'content',
-                    prompt: {
-                        start: 'What map?'
-                    }
-                }
-            ]
-        })
-    }
+	public constructor() {
+		super('brawl_command_infomation_map', {
+			aliases: ['map'],
+			args: [
+				{
+					id: 'mapname',
+					type: 'string',
+					match: 'content',
+					prompt: {
+						start: 'What map?',
+					},
+				},
+			],
+		});
+	}
 
-    public async exec(message: Message, { mapname }: { mapname: string }) {
-        if(!index.starlistapicache) return undefined
+	public async exec(message: Message, { mapname }: { mapname: string }) {
+		if (!index.starlistapicache) return undefined;
 
-        if(!index.starlistapicache.is_ready) return message.util?.send(`Hey, The api utility for this command is not ready yet.\nTry again in a few minutes.`)
-        
-        let map = index.starlistapicache?.data.get('maps')
-        map = map.list.find((el: any) => el.name === mapname)
-        if(!map) return message.channel.send(`${message.author}, map \`${mapname}\` could not be found.\nCheck the name and try again later.`)
-        let embed = this.client.util.embed()
-        .setAuthor(`${map.name}`, map.gameMode.imageUrl, map.link)
-        .setDescription(`**Gamemode:** [${map.gameMode.name}](${map.gameMode.link})\n**Environment:** [${map.environment.name}](${map.environment.imageUrl})`)
-        .setImage(`${map.imageUrl}`)
-        .setColor(map.gameMode.color)
-        .setFooter(`Information provided by StarList ❤️`)
-        return message.util?.send(embed)
-    }
+		if (!index.starlistapicache.is_ready)
+			return message.util?.send(
+				`Hey, The api utility for this command is not ready yet.\nTry again in a few minutes.`
+			);
+
+		let map = index.starlistapicache?.data.get('maps');
+		map = map.list.find((el: any) => el.name === mapname);
+		if (!map)
+			return message.channel.send(
+				`${message.author}, map \`${mapname}\` could not be found.\nCheck the name and try again later.`
+			);
+		let embed = this.client.util
+			.embed()
+			.setAuthor(`${map.name}`, map.gameMode.imageUrl, map.link)
+			.setDescription(
+				`**Gamemode:** [${map.gameMode.name}](${map.gameMode.link})\n**Environment:** [${map.environment.name}](${map.environment.imageUrl})`
+			)
+			.setImage(`${map.imageUrl}`)
+			.setColor(map.gameMode.color)
+			.setFooter(`Information provided by StarList ❤️`);
+		return message.util?.send(embed);
+	}
 }

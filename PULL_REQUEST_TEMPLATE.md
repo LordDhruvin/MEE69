@@ -6,7 +6,7 @@ Make sure you understand what it means (see http://unlicense.org/)! If you
 agree, please add yourself to AUTHORS.md file, and include the following text
 to your pull request description or a comment in it:
 
-------------------------------------------------------------------------------
+---
 
     I dedicate any and all copyright interest in this software to the
     public domain. I make this dedication for the benefit of the public at
