@@ -56,5 +56,10 @@ export default {
 		Siege: '<:Siege:802070800055926795>',
 		BigGame: '<:BigGame:802070895681077249>',
 		SuperCityRampage: '<:SuperCityRampage:802071033103646740>',
+		'3v3Victories': '<:3v3Victories:802092565536047104>',
+		PowerPlayPoints: '<:PowerPlayPoints:802093289640558612>',
+		Trophy: '<:Trophy:802093469479862292>',
+		Gadget: '<:Gadget:802093802016866325>',
+		StarPower: '<:StarPower:802093867577901098>',
 	},
 };
