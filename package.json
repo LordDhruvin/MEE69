@@ -8,11 +8,19 @@
     "start": "tsc && node Mage/index",
     "ncstart": "node Mage/index"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhruvin-purohit/Mage-Bot.git"
+  },
   "keywords": [
     "Mage"
   ],
   "author": "Dhruvin Purohit",
   "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dhruvin-purohit/Mage-Bot/issues"
+  },
+  "homepage": "https://github.com/dhruvin-purohit/Mage-Bot#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "discord-akairo": "^8.1.0",
