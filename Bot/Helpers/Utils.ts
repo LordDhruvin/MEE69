@@ -20,11 +20,19 @@ function getProgressBar(current: number, maximum: number, size = 10) {
 /**
  * @param brawler Brawler
  */
-function getBrawlerEmote(brawler: string) {
+function getBrawlerEmoteByName(brawler: string) {
 	return emojis.bsem1[brawler] || emojis.other[404];
+}
+
+/**
+ * @param brawlerId Brawler's Brawl stars player id.
+ */
+function getBrawlerEmoteById(brawlerId: number) {
+	return emojis.bsem01[brawlerId] || emojis.other[404];
 }
 
 export default {
 	getProgressBar,
-	getBrawlerEmote,
+	getBrawlerEmoteByName,
+	getBrawlerEmoteById,
 };
