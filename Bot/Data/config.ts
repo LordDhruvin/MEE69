@@ -2,6 +2,7 @@
  * I know this will error because typescript will try to find the devconfig file when we want to keep it optional.
  * I am looking for a workaround this. If you have any ideas, kindly open an issue or pull request.* * * * * * * *
  */
+// @ts-ignore
 import devconfig from './config-dev';
 import safeconfig from './safe-config';
 
