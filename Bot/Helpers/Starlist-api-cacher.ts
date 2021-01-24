@@ -1,14 +1,12 @@
 import { EventEmitter } from 'events';
 import fetch from 'node-fetch';
 
-let Data = new Map();
-
 export default class StarlistAPICacher extends EventEmitter {
 	public constructor(key: string, cachingTime: number = 2 * 60 * 1000) {
 		super();
 		this._starlist_key = key;
 		this._cachingTime = cachingTime;
-
+		this._data = new Map()
 		this.is_ready = false;
 	}
 	//I love ts :)
@@ -17,8 +15,10 @@ export default class StarlistAPICacher extends EventEmitter {
 
 	public is_ready: boolean;
 
+	private _data: Map<string, any>;
+
 	public get data() {
-		return Data;
+		return this._data;
 	}
 
 	private _sleep(ms: number) {
