@@ -137,21 +137,34 @@ async function getPlayerBrawlersById(playerTag: string) {
 		{ headers: { Authorization: `Bearer ${config.keys.supercell.bs}` } }
 	);
 	const stats = await res.json();
-	let embed = null
-	if(res.status === 200) {
+	let embed = null;
+	if (res.status === 200) {
 		embed = new MessageEmbed()
-		.setAuthor(`${Utils.getPlayerBadgeEmoteById(stats.icon.id)}${stats.name} | ${stats.tag}`)
-		.setDescription(`${stats.brawlers.map((b: any) => `${Utils.getBrawlerEmoteById(b.id)}\`${b.power} | ${b.rank} | ${b.trophies}/${b.highestTrophies}\`${emojis.bsem2.Trophy}`)}`)//Will add starpower and gadgets soon, will need their corresponding emotes which is :person_facepalming: just a pain
+			.setAuthor(
+				`${Utils.getPlayerBadgeEmoteById(stats.icon.id)}${
+					stats.name
+				} | ${stats.tag}`
+			)
+			.setDescription(
+				`${stats.brawlers.map(
+					(b: any) =>
+						`${Utils.getBrawlerEmoteById(b.id)}\`${b.power} | ${
+							b.rank
+						} | ${b.trophies}/${b.highestTrophies}\`${
+							emojis.bsem2.Trophy
+						}`
+				)}`
+			); //Will add starpower and gadgets soon, will need their corresponding emotes which is :person_facepalming: just a pain
 	}
 
 	return {
 		status: res.status,
 		result: stats,
-		embed: embed
-	}
+		embed: embed,
+	};
 }
 export default {
 	getPlayerBrawlStarsStatsById,
 	getClubBrawlStarsStatsById,
-	getPlayerBrawlersById
+	getPlayerBrawlersById,
 };
