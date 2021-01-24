@@ -17,7 +17,6 @@ function getProgressBar(current: number, maximum: number, size = 10) {
 	return `${completed}${remaining}`;
 }
 
-
 /**
  * Get a brawler's resembling discord emote
  * @param brawlerId Brawler's Brawl stars player id.
@@ -31,7 +30,7 @@ function getBrawlerEmoteById(brawlerId: number) {
  * @param badgeId Brawl stars club's badge ID
  */
 function getClubBadgeEmoteById(badgeId: number) {
-	return emojis.bsem3[badgeId] || emojis.other[404]
+	return emojis.bsem3[badgeId] || emojis.other[404];
 }
 
 /**
@@ -39,11 +38,11 @@ function getClubBadgeEmoteById(badgeId: number) {
  * @param badgeId Brawl stars Player's badge ID
  */
 function getPlayerBadgeEmoteById(badgeId: number) {
-	return emojis.bsem45[badgeId] || emojis.other[404]
+	return emojis.bsem45[badgeId] || emojis.other[404];
 }
 export default {
 	getProgressBar,
 	getBrawlerEmoteById,
 	getClubBadgeEmoteById,
-	getPlayerBadgeEmoteById
+	getPlayerBadgeEmoteById,
 };
