@@ -43,11 +43,12 @@ export default class StarlistAPICacher extends EventEmitter {
 		let brawlers = await this._fetch('brawlers');
 		this.data.set('brawlers', brawlers);
 
+		/*
 		await this._sleep(1 * 1000);
 
 		let icons = await this._fetch('icons');
 		this.data.set('icons', icons);
-
+		*/
 		await this._sleep(1 * 1000);
 
 		let maps = await this._fetch('maps');
