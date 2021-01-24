@@ -146,14 +146,16 @@ async function getPlayerBrawlersById(playerTag: string) {
 				} | ${stats.tag}`
 			)
 			.setDescription(
-				`${stats.brawlers.map(
-					(b: any) =>
-						`${Utils.getBrawlerEmoteById(b.id)}\`${b.power} | ${
-							b.rank
-						} | ${b.trophies}/${b.highestTrophies}\`${
-							emojis.bsem2.Trophy
-						}`
-				).join(`  `)}`
+				`${stats.brawlers
+					.map(
+						(b: any) =>
+							`${Utils.getBrawlerEmoteById(b.id)}\`${b.power} | ${
+								b.rank
+							} | ${b.trophies}/${b.highestTrophies}\`${
+								emojis.bsem2.Trophy
+							}`
+					)
+					.join(`  `)}`
 			); //Will add starpower and gadgets soon, will need their corresponding emotes which is :person_facepalming: just a pain
 	}
 
