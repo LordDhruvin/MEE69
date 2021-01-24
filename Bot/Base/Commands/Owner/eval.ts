@@ -58,7 +58,7 @@ export default class extends Command {
 		}
 
 		try {
-			let evalled = await eval(code);
+			let evalled = await eval(unsecure ? "(async () => {" + code + "})()" : code);
 			if (typeof evalled !== 'string') {
 				evalled = require('util').inspect(evalled);
 			}
