@@ -21,7 +21,9 @@ export default class extends Command {
 
 	public async exec(message: Message, { tag }: { tag: string }) {
 		//All below this will become a custom arguement type, tryng to learn to do that...
+		//Looking to do it as a regex that captures only the tag (without the #) and only contains those characters.
 		tag = tag.toUpperCase();
+		tag = tag.replace('#', '')
 		let tagCanOnlyContain = [
 			'0',
 			'2',
@@ -49,7 +51,7 @@ export default class extends Command {
 		}
 		if (!status) return message.util?.send(`The player tag is definetely an Incorrect one!`);
 		else {
-			let playerStats = await SupercellGameStatsUtil.getPlayerBrawlStarsStats(
+			let playerStats = await SupercellGameStatsUtil.getPlayerBrawlStarsStatsById(
 				tag
 			);
 			if (playerStats.status === 400) {
