@@ -50,7 +50,7 @@ async function getPlayerBrawlStarsStatsById(playerTag: string) {
 	}
 	return {
 		status: res.status,
-		result: res,
+		result: stats,
 		embed: embed,
 	};
 }
@@ -122,7 +122,7 @@ async function getClubBrawlStarsStatsById(clubTag: string) {
 
 	return {
 		status: res.status,
-		result: res,
+		result: stats,
 		embed: embed,
 	};
 }
