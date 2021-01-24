@@ -3,6 +3,7 @@ import { MessageEmbed } from 'discord.js';
 import config from '../Data/config';
 import index from '../index';
 import emojis from '../Data/emojis';
+import Utils from './Utils'
 
 /**
  * Get's stats of the player from the api, makes an embed, and returns embed and status of the result.
@@ -21,7 +22,7 @@ async function getPlayerBrawlStarsStatsById(playerTag: string) {
 	let brawlers = index.starlistapicache?.data.get('brawlers');
 	embed = new MessageEmbed()
 		.addField(
-			`${stats.name} | ${stats.tag}`,
+			`${Utils.getPlayerBadgeEmoteById(stats.icon.id)}${stats.name} | ${stats.tag}`,
 			`**Trophies:** \`${stats.trophies || '-'}/${
 				stats.highestTrophies || '-'
 			}\`${emojis.bsem2.Trophy}\n` +
@@ -53,7 +54,7 @@ async function getPlayerBrawlStarsStatsById(playerTag: string) {
 }
 
 /**
- * Retrieves club information from the supercell api and returns a beautifed embed, status & teh result itself.
+ * Retrieves club information from the supercell api and returns a beautifed embed, status & the result itself.
  * @param clubTag Brawl Stars club tag of the brawl stars Club
  */
 async function getClubBrawlStarsStatsById(clubTag: string) {
@@ -65,7 +66,7 @@ async function getClubBrawlStarsStatsById(clubTag: string) {
 		let presidents = stats.members.filter((m: any) => m.role === 'president')
 		let vicePresidents = stats.members.filter((m: any) => m.role === 'vicePresident')
 		embed = new MessageEmbed()
-		.setAuthor(`${stats.name} | ${stats.tag}`)
+		.setAuthor(`${Utils.getClubBadgeEmoteById(stats.badgeId)}${stats.name} | ${stats.tag}`)//No idea if that will work if it doesn't will use some emote url method
 		.setDescription(`\`\`\`\n${stats.description}\n\`\`\``)
 		.addField(`**Club Stats**`,
 		`**Trophies:** \`${stats.trophies || '-'}\`${emojis.bsem2.Trophy}\n` +
@@ -74,9 +75,9 @@ async function getClubBrawlStarsStatsById(clubTag: string) {
 		`**Members:** \`${stats.members.length || '-'}/100\``)//I guess that's the limit?
 		.addField(`**Member's Stats**`,
 		`**Presidents**\n` +
-		`${presidents.map((m: any) => `${m.name} \`${m.trophies || '-'}\`${emojis.bsem2.Trophy}`).join(`\n`)}\n` +
+		`${presidents.map((m: any) => `${Utils.getPlayerBadgeEmoteById(m.icon.id)}${m.name} \`${m.trophies || '-'}\`${emojis.bsem2.Trophy}`).join(`\n`)}\n` +
 		`**Vice Presidents**\n` +
-		`${vicePresidents.map((m: any) => `${m.name} \`${m.trophies || '-'}\`${emojis.bsem2.Trophy}`).join(`\n`)}\n`)//Will add more once i come to know what actually are the roles.
+		`${vicePresidents.map((m: any) => `${Utils.getPlayerBadgeEmoteById(m.icon.id)}${m.name} \`${m.trophies || '-'}\`${emojis.bsem2.Trophy}`).join(`\n`)}\n`)//Will add more once i come to know what actually are the roles.
 		.setColor(stats.members.find('#' + president.nameColor.slice(4)))
 		}
 
