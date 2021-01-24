@@ -19,7 +19,7 @@ function getProgressBar(current: number, maximum: number, size = 10) {
 
 /**
  * Get a brawler's resembling discord emote
- * @param brawlerId Brawler's Brawl stars player id.
+ * @param brawlerId Brawler's Brawl stars id.
  */
 function getBrawlerEmoteById(brawlerId: number) {
 	return emojis.bsem1[brawlerId] || emojis.other[404];
