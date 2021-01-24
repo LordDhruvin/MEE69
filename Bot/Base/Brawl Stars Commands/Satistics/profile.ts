@@ -47,19 +47,19 @@ export default class extends Command {
 				break;
 			}
 		}
-		if (!status) return message.channel.send(`Player Tag is Invalid`);
+		if (!status) return message.util?.send(`The player tag is definetely an Incorrect one!`);
 		else {
 			let playerStats = await SupercellGameStatsUtil.getPlayerBrawlStarsStats(
 				tag
 			);
 			if (playerStats.status === 400) {
-				return message.channel.send(
-					`Looks like the player tag isn't correct`
+				return message.util?.send(
+					`Player not found!\nMost probably the given player tag is incorrect.`
 				);
 			} else if (playerStats.status === 200 && playerStats.embed) {
-				return message.channel.send(playerStats.embed);
+				return message.util?.send(playerStats.embed);
 			} else {
-				return message.channel.send(
+				return message.util?.send(
 					`There is some unknown error with this command.\nMaybe you should try again later.`
 				);
 			}
