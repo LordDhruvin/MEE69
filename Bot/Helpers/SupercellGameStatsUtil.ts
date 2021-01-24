@@ -8,7 +8,7 @@ import emojis from '../Data/emojis';
  * Get's stats of the player from the api, makes an embed, and returns embed and status of the result.
  * @param playerTag Brawl Stars Player tag of the person
  */
-async function getPlayerBrawlStarsStats(playerTag: string) {
+async function getPlayerBrawlStarsStatsById(playerTag: string) {
 	const res = await fetch(
 		`https://bsproxy.royaleapi.dev/v1/players/%23${playerTag}`,
 		{ headers: { Authorization: `Bearer ${config.keys.supercell.bs}` } }
@@ -52,6 +52,42 @@ async function getPlayerBrawlStarsStats(playerTag: string) {
 	};
 }
 
+/**
+ * Retrieves club information from the supercell api and returns a beautifed embed, status & teh result itself.
+ * @param clubTag Brawl Stars club tag of the brawl stars Club
+ */
+async function getClubBrawlStarsStatsById(clubTag: string) {
+	const res = await fetch(`https://bsproxy.royaleapi.dev/v1/clubs/%23${clubTag}`, { headers: {'Authorization': `Bearer ${config.keys.supercell.bs}`}})
+	const stats = await res.json();
+	let embed = null
+	if(res.status === 200) {
+		let president = stats.members.find((m: any) => m.role === 'president')
+		let presidents = stats.members.filter((m: any) => m.role === 'president')
+		let vicePresidents = stats.members.filter((m: any) => m.role === 'vicePresident')
+		embed = new MessageEmbed()
+		.setAuthor(`${stats.name} | ${stats.tag}`)
+		.setDescription(`\`\`\`\n${stats.description}\n\`\`\``)
+		.addField(`**Club Stats**`,
+		`**Trophies:** \`${stats.trophies || '-'}\`${emojis.bsem2.Trophy}\n` +
+		`**Type:** \`${stats.type || '-'}\`\n` +
+		`**Required Trophies:** \`${stats.requiredTrophies || '-'}\`\n` +
+		`**Members:** \`${stats.members.length || '-'}/100\``)//I guess that's the limit?
+		.addField(`**Member's Stats**`,
+		`**Presidents**\n` +
+		`${presidents.map((m: any) => `${m.name} \`${m.trophies || '-'}\`${emojis.bsem2.Trophy}`).join(`\n`)}\n` +
+		`**Vice Presidents**\n` +
+		`${vicePresidents.map((m: any) => `${m.name} \`${m.trophies || '-'}\`${emojis.bsem2.Trophy}`).join(`\n`)}\n`)//Will add more once i come to know what actually are the roles.
+		.setColor(stats.members.find('#' + president.nameColor.slice(4)))
+		}
+
+	return {
+		status: res.status,
+		result: res,
+		embed: embed
+	}
+}
+
 export default {
-	getPlayerBrawlStarsStats,
+	getPlayerBrawlStarsStatsById,
+	getClubBrawlStarsStatsById,
 };
