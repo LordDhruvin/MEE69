@@ -153,7 +153,7 @@ async function getPlayerBrawlersById(playerTag: string) {
 						} | ${b.trophies}/${b.highestTrophies}\`${
 							emojis.bsem2.Trophy
 						}`
-				)}`
+				).join(`  `)}`
 			); //Will add starpower and gadgets soon, will need their corresponding emotes which is :person_facepalming: just a pain
 	}
 
