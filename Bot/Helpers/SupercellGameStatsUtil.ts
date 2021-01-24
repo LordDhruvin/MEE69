@@ -24,19 +24,19 @@ async function getPlayerBrawlStarsStatsById(playerTag: string) {
 			`${stats.name} | ${stats.tag}`,
 			`**Trophies:** \`${stats.trophies || '-'}/${
 				stats.highestTrophies || '-'
-			}\`${emojis.bsem2.Trophy}` +
+			}\`${emojis.bsem2.Trophy}\n` +
 				`**Power Play:** \`${stats.powerPlayPoints || '-'}/${
 					stats.highestPowerPlayPoints || '-'
-				}\`${emojis.bsem2.PowerPlayPoints}` +
+				}\`${emojis.bsem2.PowerPlayPoints}\n` +
 				`**Solo Victories:** \`${
 					stats.soloVictories || '-'
-				}/${totalTrophies}\`${emojis.bsem2.SoloShowdown}` +
+				}/${totalTrophies}\`${emojis.bsem2.SoloShowdown}\n` +
 				`**Duo Victories:** \`${
 					stats.duoVictories || '-'
-				}/${totalTrophies}\`${emojis.bsem2.DuoShowdown}` +
+				}/${totalTrophies}\`${emojis.bsem2.DuoShowdown}\n` +
 				`**3v3 Victories:** \`${
-					stats['3v3Victories'] || '-'
-				}/${totalTrophies}\`${emojis.bsem2['3v3Victories']}` +
+					stats['3vs3Victories'] || '-'
+				}/${totalTrophies}\`${emojis.bsem2['3v3Victories']}\n` +
 				`**Brawlers:** \`${stats.brawlers.length}/${
 					brawlers.list.length || '-'
 				}\``,

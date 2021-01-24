@@ -28,7 +28,7 @@ function getBrawlerEmoteByName(brawler: string) {
  * @param brawlerId Brawler's Brawl stars player id.
  */
 function getBrawlerEmoteById(brawlerId: number) {
-	return emojis.bsem01[brawlerId] || emojis.other[404];
+	return emojis.bsem1[brawlerId] || emojis.other[404];
 }
 
 export default {

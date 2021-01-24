@@ -16,6 +16,7 @@ export default class extends Command {
 					},
 				},
 			],
+			typing: true
 		});
 	}
 
@@ -40,17 +41,8 @@ export default class extends Command {
 			'U',
 			'V',
 		];
+		tagCanOnlyContain//I love ts :)
 		tag = tag.replace('O', '0');
-		let status;
-		for (let i = 0; i++; i <= tag.length) {
-			if (tagCanOnlyContain.includes(tag.charAt[i])) status = true;
-			else {
-				status = false;
-				break;
-			}
-		}
-		if (!status) return message.util?.send(`The player tag is definetely an Incorrect one!`);
-		else {
 			let playerStats = await SupercellGameStatsUtil.getPlayerBrawlStarsStatsById(
 				tag
 			);
@@ -65,6 +57,5 @@ export default class extends Command {
 					`There is some unknown error with this command.\nMaybe you should try again later.`
 				);
 			}
-		}
 	}
 }
