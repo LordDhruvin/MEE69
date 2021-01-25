@@ -20,14 +20,15 @@ export default class extends Command {
     }
 
     public async exec(message: Message, { reddit }: { reddit: string}) {
+        //Reddit is just too hard, if someone good with working on this or has a wrapper, contact me.
         let bluedditres = await fetch(`https://www.reddit.com/r/${reddit}/random/.json`)
         let blueddit = await bluedditres.json()
         let greenddit = blueddit[0].data.children[0]
         if(bluedditres.status === 200) {
         let embed = this.client.util.embed()
         .setTitle(`${greenddit.data.title}`)
-        .setDescription(`${greenddit.data.selfText}`)
-        .setURL(`${greenddit.data.permalink}`)//This EXISTSS??????????
+        .setDescription(`${greenddit.data.selftext || '\u200b'}`)
+        .setURL(`https://www.reddit.com/${greenddit.data.permalink}`)//This EXISTSS??????????
         .setFooter(`👍 ${greenddit.data.ups} 💬 ${greenddit.data.num_comments}`)
 
         return message.util?.send(embed)
