@@ -94,7 +94,7 @@ async function getClubBrawlStarsStatsById(clubTag: string) {
 			) //I guess that's the limit?
 			.addField(
 				`**Member's Stats**`,
-				`**Presidents**\n` +
+				`**President**\n` +
 					`${presidents
 						.map(
 							(m: any) =>
