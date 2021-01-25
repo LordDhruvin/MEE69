@@ -25,13 +25,16 @@ export default class extends Command {
 		let prefix: string = /*this.handler.prefix(message) || */ this.handler
 			.prefix;
 		let embed;
-		let better_description
+		let better_description;
 		if (command) {
-			better_description = Object.assign({
-				short: '404: Description not found.',
-				usage: '',
-				hidden: false
-			}, command.description)
+			better_description = Object.assign(
+				{
+					short: '404: Description not found.',
+					usage: '',
+					hidden: false,
+				},
+				command.description
+			);
 			let guildOnly = 'No';
 			if (command.channel) {
 				if (command.channel === 'guild') guildOnly = 'Yes';
@@ -50,14 +53,15 @@ export default class extends Command {
 				.addField(
 					`Description`,
 					`\`${
-						better_description.short || 'No Description Given!'//Keeping just in case!
+						better_description.short || 'No Description Given!' //Keeping just in case!
 					}\``
 				);
-			if (command.cooldown)
-				embed
-					.addField(`Cooldown`, `\`${ms(command.cooldown)}\``, true)
-					.addField(`Category`, `\`${command.category}\``)
-					.addField(`Guild Only`, `${guildOnly}`);
+			if (command.cooldown) {
+				embed.addField(`Cooldown`, `\`${ms(command.cooldown)}\``, true);
+			}
+			embed
+				.addField(`Category`, `\`${command.category}\``)
+				.addField(`Guild Only`, `${guildOnly}`);
 		}
 		let embed2 = this.client.util
 			.embed()

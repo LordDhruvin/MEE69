@@ -6,7 +6,7 @@ export default class extends Command {
     public constructor() {
         super('command_fun_reddit', {
             aliases: ['reddit'],
-            cooldown: 5e5,
+            cooldown: 5e4,
             args: [
                 {
                     id: 'reddit',
