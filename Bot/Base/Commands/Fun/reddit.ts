@@ -28,7 +28,7 @@ export default class extends Command {
         let embed = this.client.util.embed()
         .setTitle(`${greenddit.data.title}`)
         .setDescription(`${greenddit.data.selftext || '\u200b'}`)
-        .setURL(`https://www.reddit.com/${greenddit.data.permalink}`)//This EXISTSS??????????
+        .setURL(`https://www.reddit.com${greenddit.data.permalink}`)//This EXISTSS??????????
         .setFooter(`👍 ${greenddit.data.ups} 💬 ${greenddit.data.num_comments}`)
 
         return message.util?.send(embed)
