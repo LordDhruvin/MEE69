@@ -25,8 +25,13 @@ export default class extends Command {
 		let prefix: string = /*this.handler.prefix(message) || */ this.handler
 			.prefix;
 		let embed;
+		let better_description
 		if (command) {
-			if (!command.description) return undefined;
+			better_description = Object.assign({
+				short: '404: Description not found.',
+				usage: '',
+				hidden: false
+			}, command.description)
 			let guildOnly = 'No';
 			if (command.channel) {
 				if (command.channel === 'guild') guildOnly = 'Yes';
@@ -37,15 +42,15 @@ export default class extends Command {
 				.setColor(this.client.baseColor)
 				.setTitle(
 					`\`${prefix}${command.aliases[0]}${
-						command.description.usage
-							? ` ${command.description.usage}`
+						better_description.usage
+							? ` ${better_description.usage}`
 							: ''
 					}\``
 				)
 				.addField(
 					`Description`,
 					`\`${
-						command.description.short || 'No Description Given!'
+						better_description.short || 'No Description Given!'//Keeping just in case!
 					}\``
 				);
 			if (command.cooldown)
