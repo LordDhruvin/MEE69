@@ -4,7 +4,7 @@ import index from '../../../index';
 
 export default class extends Command {
 	public constructor() {
-		super('brawl_command_information_events', {
+		super('brawl_command_information_gamemode', {
 			aliases: ['gamemode', 'gamemodes'],
 			args: [
 				{
