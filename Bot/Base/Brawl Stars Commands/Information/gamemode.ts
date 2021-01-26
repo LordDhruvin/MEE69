@@ -39,8 +39,9 @@ export default class extends Command {
         .setImage(whichOne['imageUrl2'])
         .setColor(whichOne.color)
         .setTitle(whichOne.title)
-        .setFooter(whichOne.description)
         .setDescription(`\`\`\`\n${whichOne.tutorial}\n\`\`\``)
+        .addField('\u200b', `\`\`\`\n${whichOne.description}\n\`\`\``)
+        .setFooter(`Information provided by StarList ❤️`)
         return message.util?.send(embed)
 	}
 }
