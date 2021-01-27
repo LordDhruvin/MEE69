@@ -28,7 +28,14 @@ class XPHandler extends EventEmitter {//Will do the rest later.
         if(message.content.startsWith(prefix)||message.content.startsWith(`<@!${message.client.user?.id}>`)||message.content.startsWith(`<@${message.client.user?.id}>`)||!message.guild) return
         else {
             let member = message.member
-            let gainedXP = Math.ceil(Math.floor(Math.random() * (perMessageMaxXP - perMessageMinXP + 1) ) + perMessageMinXP)
+            let gainedXP = Math.ceil((Math.floor(Math.random() * (perMessageMaxXP - perMessageMinXP + 1) ) + perMessageMinXP) * multi)
+            let currentXP = this.mdb.get(member!.user.id, "xp", 0)
+            let currentLVL = this.mdb.get(member!.user.id, "lvl", 1)
+            let newXP = currentXP + gainedXP
+            let thresholdXP = (currentLVL + 1) * neededXP
+            if(newXP >= thresholdXP) {
+                this.emit("levelUP", message, currentLVL + 1)
+            }
         }
     }
 }
