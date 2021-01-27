@@ -2,7 +2,7 @@ import { MongooseProvider } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { EventEmitter } from 'events';
 
-class XPHandler extends EventEmitter {
+export default class XPHandler extends EventEmitter {
 	//Will do the rest later.
 
 	/**
