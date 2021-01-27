@@ -22,7 +22,7 @@ class XPHandler extends EventEmitter {//Will do the rest later.
      * @param multi The XP multiplier
      * @param prefix The prefix for this server
      * @param perMessageXP The xp to be given each message.
-     * @param neededXP The needed XP (formula = neededXP * NextLevel)
+     * @param neededXP The needed XP (formula = neededXP * currentLevel * NextLevel)
      */
     public async giveXP(message: Message, multi = 1, prefix: string,perMessageMinXP: number, perMessageMaxXP: number, neededXP: number) {
         if(message.content.startsWith(prefix)||message.content.startsWith(`<@!${message.client.user?.id}>`)||message.content.startsWith(`<@${message.client.user?.id}>`)||!message.guild) return
@@ -32,9 +32,11 @@ class XPHandler extends EventEmitter {//Will do the rest later.
             let currentXP = this.mdb.get(member!.user.id, "xp", 0)
             let currentLVL = this.mdb.get(member!.user.id, "lvl", 1)
             let newXP = currentXP + gainedXP
-            let thresholdXP = (currentLVL + 1) * neededXP
+            let thresholdXP = currentLVL * (currentLVL + 1) * neededXP
             if(newXP >= thresholdXP) {
                 this.emit("levelUP", message, currentLVL + 1)
+            } else {
+                this.mdb.set(member!.user.id, "xp", newXP)
             }
         }
     }
