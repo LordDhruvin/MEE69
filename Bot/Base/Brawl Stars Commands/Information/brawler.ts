@@ -23,7 +23,7 @@ export default class extends Command {
 		message: Message,
 		{ brawlername }: { brawlername: string }
 	) {
-		if (!index.starlistapicache) return undefined;
+		if (!index.starlistapicache) return this.remove(); //Remove the command if the functionality is not enabled.
 
 		if (!index.starlistapicache.is_ready)
 			return message.util?.send(

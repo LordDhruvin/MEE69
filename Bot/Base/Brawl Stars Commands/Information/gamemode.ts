@@ -21,7 +21,7 @@ export default class extends Command {
 
 	public async exec(message: Message, { gm }: { gm: string }) {
 		//Means it is not setup
-		if (!index.starlistapicache) return undefined;
+		if (!index.starlistapicache) return this.remove();//Remove the command if the functionality is not enabled.
 
 		//Means it isn't cached yet.
 		if (!index.starlistapicache.is_ready)

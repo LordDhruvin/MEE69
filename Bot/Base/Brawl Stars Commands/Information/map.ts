@@ -20,7 +20,7 @@ export default class extends Command {
 	}
 
 	public async exec(message: Message, { mapname }: { mapname: string }) {
-		if (!index.starlistapicache) return undefined;
+		if (!index.starlistapicache) return  this.remove();
 
 		if (!index.starlistapicache.is_ready)
 			return message.util?.send(
