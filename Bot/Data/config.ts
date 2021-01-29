@@ -3,7 +3,10 @@
  * I am looking for a workaround this. If you have any ideas, kindly open an issue or pull request.* * * * * * * *
  */
 // @ts-ignore
-import devconfig from './config-dev';
+let devconfig;
+try {
+	devconfig = require('./config-dev');
+} catch (e) {}
 import safeconfig from './safe-config';
 
 export default {
