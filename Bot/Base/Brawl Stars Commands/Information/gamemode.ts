@@ -30,6 +30,7 @@ export default class extends Command {
 			);
 		//The actual needed data
 		let gamemodes = index.starlistapicache?.data.get('gamemodes');
+		gamemodes = gamemodes.list
 		let whichOne = gamemodes.find((el: any) => el.name === gm);
 
 		if (!whichOne)
