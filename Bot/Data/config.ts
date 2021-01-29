@@ -46,11 +46,11 @@ export default {
  * Note: The arrangement has been done in such a way that i can keep the same repository for hosting and for dev build *
  * * * * The format (devconfig file) uses the same format. just fill in your values in the file named dev-config * * * *
  * * * * if process.env[<whatev>] is not there, the bot will use devconfig file and due to safeconfig and devconfig both
- * * * * being there in dev pc but not in host pc, we give priority to devconfig first keeping there no prefix clash * *
+ * * * * being there in dev pc but not in host pc, we give priority to devconfig first so that there is no prefix clash 
  * * * * or any such things. it is recommended not to change anything. * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * * * * devconfig.ts must be kept private under all circumstances * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * * * * safeconfig.ts does not have to be hidden as there is no confidential data in it * * * * * * * * * * * * * * * *
+ * * * * dev-config.ts is to be kept private at all times for the safety of your bot * * * * * * * * * * * * * * * * * * 
+ * * * * safe-config.ts need not be kept hidden as it has no confidential data * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * Starlist API key is optional due to it being a private api. * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * GitHub API key can be obtained failry easily. * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
