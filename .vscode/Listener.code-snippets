@@ -1,0 +1,22 @@
+{
+	"listener": {
+		"scope": "javascript, typescript",
+		"prefix": "listener",
+		"body": [
+			"import { listener } from 'discord-akairo';",
+			"",
+			"export default class extends Command{",
+			"public constructor() {",
+			"super('$1', {",
+            "emitter: '$2',",
+            "event: '$3',",
+			"});",
+			"}",
+			"public async exec(something: any) {",
+			"$4",
+			"}",
+			"}",
+			""
+		]
+	}
+}
