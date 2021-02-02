@@ -6,7 +6,7 @@
 			"import { Command } from 'discord-akairo';",
 			"import { Message } from 'discord.js'",
 			"",
-			"export default class extends Command{",
+			"export default class extends Command {",
 			"public constructor() {",
 			"super('$1', {",
 			"aliases: ['$2'],",

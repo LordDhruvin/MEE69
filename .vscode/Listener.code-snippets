@@ -3,9 +3,9 @@
 		"scope": "javascript, typescript",
 		"prefix": "listener",
 		"body": [
-			"import { listener } from 'discord-akairo';",
+			"import { Listener } from 'discord-akairo';",
 			"",
-			"export default class extends Command{",
+			"export default class extends Listener {",
 			"public constructor() {",
 			"super('$1', {",
             "emitter: '$2',",
