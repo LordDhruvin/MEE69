@@ -40,16 +40,21 @@ export default {
 		starlist: process.env.STARLIST_API_KEY || devconfig.keys.starlist,
 		github: process.env.GITHUB_API_KEY || devconfig.keys.github,
 	},
+	lavalink: {
+		host: process.env.LAVALINK_HOST || devconfig.lavalink.host,
+		port: process.env.LAVALINK_PORT || devconfig.lavalink.port,
+		password: process.env.LAVALINK_PW || devconfig.lavalink.password,
+	},
 };
 
 /**
  * Note: The arrangement has been done in such a way that i can keep the same repository for hosting and for dev build *
  * * * * The format (devconfig file) uses the same format. just fill in your values in the file named dev-config * * * *
  * * * * if process.env[<whatev>] is not there, the bot will use devconfig file and due to safeconfig and devconfig both
- * * * * being there in dev pc but not in host pc, we give priority to devconfig first so that there is no prefix clash 
+ * * * * being there in dev pc but not in host pc, we give priority to devconfig first so that there is no prefix clash
  * * * * or any such things. it is recommended not to change anything. * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * * * * dev-config.ts is to be kept private at all times for the safety of your bot * * * * * * * * * * * * * * * * * * 
+ * * * * dev-config.ts is to be kept private at all times for the safety of your bot * * * * * * * * * * * * * * * * * *
  * * * * safe-config.ts need not be kept hidden as it has no confidential data * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * Starlist API key is optional due to it being a private api. * * * * * * * * * * * * * * * * * * * * * * * * * *
