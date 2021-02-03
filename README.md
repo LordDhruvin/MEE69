@@ -1,6 +1,6 @@
-# Mage
+# MEE69
 
-An Open Source discord bot fulfil my needs.
+MEE6, but better
 [Help regarding this can be asked here](https://dsc.gg/dhruvin)
 
 # Documentation
