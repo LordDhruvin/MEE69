@@ -2,7 +2,12 @@
  * I know this will error because typescript will try to find the devconfig file when we want to keep it optional.
  * I am looking for a workaround this. If you have any ideas, kindly open an issue or pull request.* * * * * * * *
  */
-import devconfig from './config-dev'
+let devconfig
+try {
+	devconfig = require('./config-dev')
+	devconfig = devconfig.default
+} catch (e) {}
+
 import safeconfig from './safe-config';
 
 export default {
