@@ -41,6 +41,23 @@ let DataBaseGuild = new Schema({
 		max: 3,
 		min: 1,
 	},
+	//never worked with schema inside schema before. let's see how this goes
+	members: new Schema({
+		id: {
+			type: String,
+			required: true,
+		},
+		xp: {
+			type: Number,
+		},
+		warns: new Schema({
+			//Schema inside Schema inside Schema
+			rsn: {
+				type: String,
+				maxlength: 64,
+			},
+		}),
+	}),
 	rr: {
 		//Reaction roles
 		type: Map, //I didn't know this exists or if this will even work.

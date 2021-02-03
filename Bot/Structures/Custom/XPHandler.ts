@@ -17,47 +17,63 @@ export default class XPHandler extends EventEmitter {
 
 	private mdb: MongooseProvider;
 
+	//@ts-ignore will use this later so just ignore
+	private cd: Map<any, any> = new Map()
+
 	/**
-	 * Gives a user xp takes care of some checks but it is recommended to do it yourself
-	 * @param message The message that triggered this
-	 * @param multi The XP multiplier
-	 * @param prefix The prefix for this server
-	 * @param perMessageXP The xp to be given each message.
-	 * @param neededXP The needed XP (formula = neededXP * currentLevel * NextLevel)
+	 * Gimme Gimme
+	 * @param message - The message that triggered this event.
+	 * @param perMessageMinXP - The min amt of xp to be given each message. Better not keep this negative.
+	 * @param perMessageMaxXP - The max amt of xp to be given each message. Better not keep this negative.
+	 * @param multi - Multiplier
 	 */
 	public async giveXP(
 		message: Message,
-		multi = 1,
-		prefix: string,
-		perMessageMinXP: number,
-		perMessageMaxXP: number,
-		neededXP: number
+		perMessageMinXP: number = 15,
+		perMessageMaxXP: number = 25,
+		multi: number = 1
 	) {
-		if (
-			message.content.startsWith(prefix) ||
-			message.content.startsWith(`<@!${message.client.user?.id}>`) ||
-			message.content.startsWith(`<@${message.client.user?.id}>`) ||
-			!message.guild
-		)
-			return;
+		if(!message.guild) return;
 		else {
 			let member = message.member;
-			let gainedXP = Math.ceil(
+			let px = Math.ceil(//["x", "p"].reverse()
 				(Math.floor(
 					Math.random() * (perMessageMaxXP - perMessageMinXP + 1)
 				) +
 					perMessageMinXP) *
 					multi
 			);
-			let currentXP = this.mdb.get(member!.user.id, 'xp', 0);
-			let currentLVL = this.mdb.get(member!.user.id, 'lvl', 1);
-			let newXP = currentXP + gainedXP;
-			let thresholdXP = currentLVL * (currentLVL + 1) * neededXP;
-			if (newXP >= thresholdXP) {
-				this.emit('levelUP', message, currentLVL + 1);
-			} else {
-				this.mdb.set(member!.user.id, 'xp', newXP);
+			let xp = this.mdb.get(member!.user.id, 'xp', 0);
+			let lvl = this._getLevelFromXP(xp)
+			xp += px
+			this.mdb.set(member!.user.id, 'xp', xp)
+			let newlvl = this._getLevelFromXP(xp)
+			if(newlvl != lvl) {//This ensures that newlvl is > lvl
+				this.emit('levelup', message)
 			}
 		}
+	}
+
+	private _getLevelUpXP(n: number) {
+		return 100*(1.2**n)
+	}
+
+	private _getLevelFromXP(n: number) {
+		let lvl = 0
+		while (n >= this._getLevelUpXP(lvl)) {
+			n -= this._getLevelUpXP(lvl)
+			lvl += 1
+		}
+		return lvl
+	}
+
+	//@ts-ignore Will use later, so just ignore
+	private _getRemainingXP(n: number) {
+		let x = 0
+		let lvl = this._getLevelFromXP(n)
+		for (let l = 0; l <= lvl; l++) {
+			x += this._getLevelUpXP(l)			
+		}//idk what am i doing.
+		return x
 	}
 }
