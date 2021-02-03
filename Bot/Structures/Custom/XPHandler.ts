@@ -2,6 +2,7 @@ import { MongooseProvider } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { EventEmitter } from 'events';
 
+//This ain't being used atm because it is under progress + it saves directly by user id which isn't what we want.
 export default class XPHandler extends EventEmitter {
 	//Will do the rest later.
 
