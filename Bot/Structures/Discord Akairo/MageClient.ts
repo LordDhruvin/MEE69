@@ -27,8 +27,9 @@ require('../Discord.js/MageUser');
 require('../JavaScript/Array');
 
 //Mongoose
-require('../Mongoose/Index/GuildDataBaseConnection');
-require('../Mongoose/Index/UserDataBaseConnection');
+//require('../Mongoose/Index/GuildDataBaseConnection');
+//require('../Mongoose/Index/UserDataBaseConnection');
+//Not setup yet.
 
 ////////////////////////////////////////////////////////
 ///                   Mage Client                   ///
@@ -38,6 +39,8 @@ declare module 'discord-akairo' {
 	interface AkairoClient {
 		CommandHandler: CommandHandler;
 		BrawlStarsCommandHandler: CommandHandler;
+		MEE69CommandHandler: CommandHandler;
+		meecolor: number | string;
 		ListenerHandler: ListenerHandler;
 		InhibitorHandler: InhibitorHandler;
 		logger: MageLogger;
@@ -120,6 +123,46 @@ export default class MageClient extends AkairoClient {
 		},
 	});
 
+		public MEE69CommandHandler: CommandHandler = new CommandHandler(this, {
+		directory: path.join(
+			__dirname,
+			'..',
+			'..',
+			'Base',
+			'MEE69 Commands'
+		),
+		//(message) => {
+		prefix: "!",//to lazy to add this to config
+		//message.guild ? this.gdb.get(message.guild.id, bsprefix, config.bot.bsprefix) : config.bot.bsprefix
+		//},
+		aliasReplacement: /-/g,
+		allowMention: true,
+		handleEdits: true,
+		commandUtil: true,
+		defaultCooldown: 5e3,
+		ignoreCooldown: this.ownerID,
+		ignorePermissions: this.ownerID,
+		automateCategories: true,
+		argumentDefaults: {
+			//won't be used as there will be no prompts
+			prompt: {
+				modifyStart: (_: Message, str: string) =>
+					`${str}\n\nType \`cancel\` to cancel command`,
+				modifyRetry: (_: Message, str: string) =>
+					`${str}\n\nType \`cancel\` to cancel command`,
+				timeout: `You took so long that the command got cancelled.`,
+				ended: (message: Message) =>
+					`${message.author}, you failed too many times.\nThe command has been cancelled`,
+				cancel: `The command has been cancelled.`,
+				time: 3 * 10 * 1000,
+				retries: 3,
+			},
+			otherwise: '',
+		},
+	});
+
+	public meecolor = "#ccff00"//no i won't save this anywhere
+
 	public baseColor = config.bot.color;
 
 	public InhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
@@ -175,19 +218,23 @@ export default class MageClient extends AkairoClient {
 	 * @private
 	 */
 	private async _init() {
-		this.CommandHandler.useListenerHandler(this.ListenerHandler),
-			this.CommandHandler.useInhibitorHandler(this.InhibitorHandler),
+		this.CommandHandler.useListenerHandler(this.ListenerHandler);
+			this.CommandHandler.useInhibitorHandler(this.InhibitorHandler);
 			this.BrawlStarsCommandHandler.useInhibitorHandler(
 				this.InhibitorHandler
-			),
+			);
+			this.BrawlStarsCommandHandler.useListenerHandler(this.ListenerHandler)
+			this.MEE69CommandHandler.useInhibitorHandler(this.InhibitorHandler)
+			this.MEE69CommandHandler.useListenerHandler(this.ListenerHandler)
 			this.ListenerHandler.setEmitters({
 				Bot: this,
 				CommandHandler: this.CommandHandler,
 				BrawlStarsCommandHandler: this.BrawlStarsCommandHandler,
+				MEE69: this.MEE69CommandHandler,
 				ListenerHandler: this.ListenerHandler,
 				process: process,
 			}),
-			this.CommandHandler.loadAll(),
+			this.CommandHandler.loadAll();
 			this.logger.log(
 				'Command',
 				'All commands loaded',
@@ -199,13 +246,15 @@ export default class MageClient extends AkairoClient {
 			'All Brawl Stars Commands loaded',
 			'Brawl Stars Command Handler'
 		);
-		this.ListenerHandler.loadAll(),
+		this.MEE69CommandHandler.loadAll()
+		this.logger.log('Command', 'All Commands Loaded', 'MEE69')
+		this.ListenerHandler.loadAll();
 			this.logger.log(
 				'Listener',
 				'All listeners Loaded',
 				'Listener Handler'
 			),
-			this.InhibitorHandler.loadAll(),
+			this.InhibitorHandler.loadAll();
 			this.logger.log(
 				'Inhibitor',
 				'All Inhibitors Loaded',
