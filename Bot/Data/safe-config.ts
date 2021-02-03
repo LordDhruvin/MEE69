@@ -1,6 +1,6 @@
 export default {
 	bot: {
-		owners: ['767992139850055702'],
+		owners: ['767992139850055702', '477845082440204288'],
 		prefix: 'wtf',
 		bsprefix: 'bs',
 		color: 0x0000ff,
