@@ -73,8 +73,8 @@ export default class XPHandler extends EventEmitter {
 		let x = 0
 		let lvl = this._getLevelFromXP(n)
 		for (let l = 0; l <= lvl; l++) {
-			x += this._getLevelUpXP(l)			
+			x += this._getLevelUpXP(l)
 		}//idk what am i doing.
-		return x
+		return x - n
 	}
 }
