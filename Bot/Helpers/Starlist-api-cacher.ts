@@ -26,7 +26,7 @@ export default class StarlistAPICacher extends EventEmitter {
 	}
 
 	private async _fetch(path: string) {
-		let temp = await fetch(`https://api.starlist.pro/${path}`, {
+		let temp = await fetch(`https://api.brawlify.com/${path}`, {
 			headers: {
 				Authorization: `Bearer ${this._starlist_key}`,
 			},
