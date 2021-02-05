@@ -56,11 +56,11 @@ export default class XPHandler extends EventEmitter {
 	}
 
 	private _getLevelUpXP(n: number) {
-		return 100*(1.2**n)
+		return 5 / 6 * n * (2 * n * n + 27 * n + 91)//Credits https://pskramer.github.io/mee6calc/
 	}
 
 	private _getLevelFromXP(n: number) {
-		let lvl = 0
+		let lvl = 1//Needs to be starting from 1
 		while (n >= this._getLevelUpXP(lvl)) {
 			n -= this._getLevelUpXP(lvl)
 			lvl += 1
@@ -69,12 +69,9 @@ export default class XPHandler extends EventEmitter {
 	}
 
 	//@ts-ignore Will use later, so just ignore
-	private _getRemainingXP(n: number) {
-		let x = 0
+	private _getRemainingXP(n: number) {//Credits https://pskramer.github.io/mee6calc/
 		let lvl = this._getLevelFromXP(n)
-		for (let l = 0; l <= lvl; l++) {
-			x += this._getLevelUpXP(l)
-		}//idk what am i doing.
-		return x - n
+		let lvlUp = this._getLevelUpXP(n)
+		return lvlUp - lvl
 	}
 }
