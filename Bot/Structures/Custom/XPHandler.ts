@@ -45,36 +45,36 @@ export default class XPHandler extends EventEmitter {
 					multi
 			);
 			let xp = this.mdb.get(member!.user.id, 'xp', 0);
-			let lvl = this.getLevelFromXP(xp)
+			let lvl = await this.getLevelFromXP(xp)
 			xp += px
 			this.mdb.set(member!.user.id, 'xp', xp)
-			let newlvl = this.getLevelFromXP(xp)
+			let newlvl = await this.getLevelFromXP(xp)
 			if(newlvl != lvl) {//This ensures that newlvl is > lvl
 				this.emit('levelup', message)
 			}
 		}
 	}
 
-	public getLevelUpXP(n: number) {
+	public async getLevelUpXP(n: number) {
 		return 5 / 6 * n * (2 * n * n + 27 * n + 91)//Credits https://pskramer.github.io/mee6calc/
 	}
 
-	public getLevelFromXP(n: number) {
+	public async getLevelFromXP(n: number) {
 		let lvl = 1//0 makes no sense.
 		//This loop makes it slow, especially if user is at a high level.
 		//maybe that will make me save level to database even tho it isn't needed.
 		//If anyone has any other efficient method, contact me: https://dsc.gg/dhruvin
 		//Pr is welcome.
-		while (n >= this.getLevelUpXP(lvl)) {
+		while (n >= await this.getLevelUpXP(lvl)) {
 			lvl += 1
 		}
 		return lvl
 	}
 
 	//@ts-ignore Will use later, so just ignore
-	public getRemainingXP(n: number) {
-		let lvl = this.getLevelFromXP(n)
-		let lvlUp = this.getLevelUpXP(lvl)
+	public async getRemainingXP(n: number) {
+		let lvl = await this.getLevelFromXP(n)
+		let lvlUp = await this.getLevelUpXP(lvl)
 		return lvlUp - n
 	}
 }
