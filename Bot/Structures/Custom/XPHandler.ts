@@ -3,6 +3,8 @@ import { Message } from 'discord.js';
 import { EventEmitter } from 'events';
 
 //This ain't being used atm because it is under progress + it saves directly by user id which isn't what we want.
+//I think i will just keep xp a global property, will require whitelisting of guild or soemthing to protect against xp farming
+//idk if global then level roles will be hard AF
 export default class XPHandler extends EventEmitter {
 	//Will do the rest later.
 
