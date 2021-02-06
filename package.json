@@ -1,26 +1,26 @@
 {
-  "name": "mage",
+  "name": "mee-sixty-nine",
   "version": "1.0.0",
   "description": "A discord bot for managing my servers and stuff",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node Mage/index",
-    "ncstart": "node Mage/index"
+    "start": "tsc && node dist/index",
+    "ncstart": "node dist/index"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dhruvin-purohit/Mage-Bot.git"
+    "url": "git+https://github.com/MEE69/MEE69.git"
   },
   "keywords": [
-    "Mage"
+    "MEE69"
   ],
   "author": "Dhruvin Purohit",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/dhruvin-purohit/Mage-Bot/issues"
+    "url": "https://github.com/MEE69/MEE69/issues"
   },
-  "homepage": "https://github.com/dhruvin-purohit/Mage-Bot#readme",
+  "homepage": "https://github.com/MEE69/MEE69#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "discord-akairo": "^8.1.0",

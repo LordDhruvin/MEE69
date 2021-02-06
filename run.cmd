@@ -1,19 +1,19 @@
 @echo OFF
-title Mage Bot Admin Panel
+title MEE69 Bot Admin Panel
 cls
 color 0B
-prompt Admin$S$B$SMage$SBot$S$G
+prompt Admin$S$B$SMEE69$SBot$S$G
 IF "%1"=="--no-compile" (
     tsc
-    cd Mage
+    cd dist
     node index
 ) ELSE (
-IF EXIST Mage\NUL (
-    cd Mage
+IF EXIST dist\NUL (
+    cd dist
     node index
 ) ELSE (
     tsc
-    cd Mage
+    cd dist
     node index
 )
 )
