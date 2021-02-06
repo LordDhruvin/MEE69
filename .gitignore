@@ -6,7 +6,7 @@ config-dev.ts
 # Unnecessary
 node_modules
 package-lock.json
-Mage
+dist
 
 # Useless
 Cache

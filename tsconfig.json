@@ -22,8 +22,8 @@
 		"forceConsistentCasingInFileNames": true,
 		"suppressImplicitAnyIndexErrors": true,
 		"sourceMap": true,
-		"rootDir": "Bot",
-		"outDir": "Mage",
+		"rootDir": "src",
+		"outDir": "dist",
 		"resolveJsonModule": true
 	},
 	"exclude": ["node_modules"]
