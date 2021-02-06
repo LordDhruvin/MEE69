@@ -56,15 +56,12 @@ export default class XPHandler extends EventEmitter {
 	}
 
 	public async getLevelUpXP(n: number) {
-		return 5 / 6 * n * (2 * n * n + 27 * n + 91)//Credits https://pskramer.github.io/mee6calc/
+		return Math.ceil(5 / 6 * n * (2 * n * n + 27 * n + 91))
 	}
 
 	public async getLevelFromXP(n: number) {
 		let lvl = 1//0 makes no sense.
-		//This loop makes it slow, especially if user is at a high level.
-		//maybe that will make me save level to database even tho it isn't needed.
-		//If anyone has any other efficient method, contact me: https://dsc.gg/dhruvin
-		//Pr is welcome.
+		//Nvm loop isn't that slow, tested till level 80.
 		while (n >= await this.getLevelUpXP(lvl)) {
 			lvl += 1
 		}
