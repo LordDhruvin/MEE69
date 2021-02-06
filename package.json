@@ -1,6 +1,6 @@
 {
   "name": "mee-sixty-nine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A discord bot for managing my servers and stuff",
   "main": "index.js",
   "scripts": {
