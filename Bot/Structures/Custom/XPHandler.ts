@@ -60,18 +60,21 @@ export default class XPHandler extends EventEmitter {
 	}
 
 	private _getLevelFromXP(n: number) {
-		let lvl = 1//Needs to be starting from 1
+		let lvl = 1//0 makes no sense.
+		//This loop makes it slow, especially if user is at a high level.
+		//maybe that will make me save level to database even tho it isn't needed.
+		//If anyone has any other efficient method, contact me: https://dsc.gg/dhruvin
+		//Pr is welcome.
 		while (n >= this._getLevelUpXP(lvl)) {
-			n -= this._getLevelUpXP(lvl)
 			lvl += 1
 		}
 		return lvl
 	}
 
 	//@ts-ignore Will use later, so just ignore
-	private _getRemainingXP(n: number) {//Credits https://pskramer.github.io/mee6calc/
+	private _getRemainingXP(n: number) {
 		let lvl = this._getLevelFromXP(n)
-		let lvlUp = this._getLevelUpXP(n)
-		return lvlUp - lvl
+		let lvlUp = this._getLevelUpXP(lvl)
+		return lvlUp - n
 	}
 }
