@@ -16,7 +16,11 @@ export default class extends Listener {
 			chn = this.client.channels.cache.get(
 				player.textChannel,
 			) as TextChannel;
-			chn.send('Track `' + track.title + '` is Stuck due to some unknown error.');
+			chn.send(
+				'Track `' +
+					track.title +
+					'` is Stuck due to some unknown error.',
+			);
 		}
 
 		let chnn = this.client.channels.cache.get(
@@ -33,6 +37,7 @@ export default class extends Listener {
 		let embed = this.client.util
 			.embed()
 			.setTitle('Track Stuck')
+			.setColor(0xff0000)
 			.setDescription(`\`\`\`md\n* Track: ${track.title}\`\`\``);
 		chn
 			? embed.addField(

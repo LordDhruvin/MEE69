@@ -21,7 +21,9 @@ export default class extends Listener {
 				player.textChannel,
 			) as TextChannel;
 			chn.send(
-				'Track `' + track.title + '` has encountered some unknown Error.',
+				'Track `' +
+					track.title +
+					'` has encountered some unknown Error.',
 			);
 		}
 
@@ -48,7 +50,8 @@ export default class extends Listener {
 						? `${_13blnkspaces}* Cause: ${payload.exception.cause}\n${_13blnkspaces}* Message: ${payload.exception.message}\n${_13blnkspaces}* Severity: ${payload.exception.severity}`
 						: `Unknown`
 				}\`\`\``,
-			);
+			)
+			.setColor(0xff0000);
 		chn
 			? embed.addField(
 					'More Info',

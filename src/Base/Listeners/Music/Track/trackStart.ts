@@ -16,7 +16,8 @@ export default class extends Listener {
 			) as TextChannel;
 			let embed = this.client.util
 				.embed()
-				.setTitle('Now Playing: ' + track.title);
+				.setTitle('Now Playing: ' + track.title)
+				.setColor('RANDOM');
 			track.thumbnail ? embed.setThumbnail(track.thumbnail) : null;
 			track.uri ? embed.setURL(track.uri) : null;
 			track.requester
