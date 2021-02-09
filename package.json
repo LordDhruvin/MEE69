@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/MEE69/MEE69#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "discord-akairo": "^8.1.0",
     "discord-paginationembed": "^2.1.0",
