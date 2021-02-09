@@ -1,10 +1,12 @@
 import { Structures } from 'discord.js';
 import blacklist from '../../Data/blacklist';
 import MageClient from '../Discord Akairo/MageClient';
+import { Player } from 'erela.js';
 
 declare module 'discord.js' {
 	interface Guild {
 		banned: boolean;
+		player(): Promise<Player | undefined>;
 	}
 }
 
