@@ -32,7 +32,7 @@ if (config.keys.starlist) {
 	starlist = new StarlistAPICacher(config.keys.starlist);
 	starlist.init();
 	starlist.on('ready', (data: Map<any, any>) => {
-		client.logger.success(`Size: ${data.size}`, 'Star List API Cacher');
+		client.logger.success(`Cached data successfully\nSize: ${data.size}`, 'Star List API Cacher');
 	});
 }
 export default {
