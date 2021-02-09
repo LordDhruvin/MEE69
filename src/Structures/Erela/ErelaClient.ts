@@ -1,5 +1,4 @@
 import { Manager, Payload } from 'erela.js';
-import { send } from 'process';
 import config from '../../Data/config';
 import type MageClient from '../Discord Akairo/MageClient';
 // Most of this is from "Neo-Akairo" (link_coming_soon_no_internet)
