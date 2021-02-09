@@ -1,5 +1,6 @@
 import { Structures } from 'discord.js';
 import blacklist from '../../Data/blacklist';
+import MageClient from '../Discord Akairo/MageClient';
 
 declare module 'discord.js' {
 	interface Guild {
@@ -21,6 +22,12 @@ export default Structures.extend('Guild', (Guild) => {
 		public get banned(): boolean {
 			if (blacklist.guilds.includes(this.id)) return true;
 			else return false;
+		}
+
+		public async player() {
+			let player = await (this.client as MageClient).music.players?.get(this.id)
+			if(player) return player
+			else return undefined
 		}
 	}
 
