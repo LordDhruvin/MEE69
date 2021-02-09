@@ -9,6 +9,7 @@ export default class extends Listener {
 	}
 
 	public async exec() {
+		this.client.music.init(this.client.user?.id)
 		this.client.logger.success(
 			this.client.text.LISTENERS.CLIENT.READY.replace(
 				'$VAR1',
