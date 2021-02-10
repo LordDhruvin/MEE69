@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { Role } from 'discord.js';
+//import { Role } from 'discord.js';
 import { MessageAttachment } from 'discord.js';
 import { VoiceChannel } from 'discord.js';
 import { Message } from 'discord.js';
@@ -36,9 +36,9 @@ export default class extends Command {
 			);
 
 		if (
-			!player ||
+			!player/* || 
 			message.member?.roles.cache.find((r: Role) => r.name === 'DJ') ||
-			message.member?.hasPermission('MANAGE_CHANNELS')
+			message.member?.hasPermission('MANAGE_CHANNELS')*/ // i will add a check to see if their channels are the same, if so i will have to skip the step.
 		) {
 			//will need another role name here, members with this role can stop a current playing music and start it anywhere they want to.
 

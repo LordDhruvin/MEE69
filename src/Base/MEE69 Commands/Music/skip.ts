@@ -27,7 +27,7 @@ export default class extends Command {
 			: null;
 
 		if (
-			(chn?.id != player.voiceChannel ||
+			(chn?.id != player.voiceChannel &&
 				!message.member?.hasPermission('MANAGE_GUILD')) &&
 			player.voiceChannel
 		)
@@ -40,8 +40,8 @@ export default class extends Command {
 				),
 			);
 		if (
-			!message.member?.roles.cache.find((r: Role) => r.name === 'DJ') ||
-			!message.member.hasPermission('MANAGE_CHANNELS')
+			!message.member?.roles.cache.find((r: Role) => r.name === 'DJ') &&
+			!message.member?.hasPermission('MANAGE_CHANNELS')
 		)
 			return message.channel.send(
 				'You need to have the "DJ" role or the "Manage Channels" permission to use this command!',
