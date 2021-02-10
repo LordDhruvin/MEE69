@@ -3,7 +3,7 @@ import { Message, VoiceChannel } from 'discord.js';
 
 export default class extends Command {
 	public constructor() {
-		super('comand_mee69_stop', {
+		super('comand_mee69_music_stop', {
 			aliases: ['stop', 'fuck-off'],
 			channel: 'guild',
 		});

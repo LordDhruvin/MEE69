@@ -4,7 +4,7 @@ import { Message, VoiceChannel } from 'discord.js';
 
 export default class extends Command {
 	public constructor() {
-		super('comand_mee69_skip', {
+		super('comand_mee69_music_skip', {
 			aliases: ['skip', 'fs', 'next-song'],
 			channel: 'guild',
 		});

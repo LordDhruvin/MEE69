@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 
 export default class extends Command {
 	public constructor() {
-		super('command_mee69_nowplaying', {
+		super('command_mee69_music_nowplaying', {
 			aliases: ['now-playing', 'np'],
 			channel: 'guild',
 		});
