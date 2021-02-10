@@ -50,6 +50,6 @@ export default class extends Command {
 
 		player.stop();
 
-		return message.reply('Skipped the song :thumbsup_tone1:');
+		return message.reply(':fast_forward: Skipped the song :thumbsup_tone1:');
 	}
 }

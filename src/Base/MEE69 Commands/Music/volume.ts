@@ -9,7 +9,7 @@ export default class extends Command {
 			args: [
 				{
 					id: 'vol',
-					type: Argument.range('number', 0, 100),
+					type: Argument.range('number', 0, 101),
 					prompt: {
 						start: 'What do you want the volume to be?',
 						retry:

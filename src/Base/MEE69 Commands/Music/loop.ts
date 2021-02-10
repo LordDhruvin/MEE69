@@ -51,12 +51,12 @@ export default class extends Command {
 			let pq = player.queueRepeat;
 			player.setQueueRepeat(pq ? false : true);
 
-			return message.reply(`:loop: ${pq ? 'Disabled' : 'Enabled'}`);
+			return message.reply(`:repeat: ${pq ? 'Disabled' : 'Enabled'}`);
 		} else {
 			let pt = player.trackRepeat;
 			player.setTrackRepeat(pt ? false : true); //highly doubt that emoji.
 
-			return message.reply(`:loop_one: ${pt ? 'Disabled' : 'Enabled'}`); //highly doubt that emoji.
+			return message.reply(`:repeat_one: ${pt ? 'Disabled' : 'Enabled'}`); //highly doubt that emoji.
 		}
 	}
 }
