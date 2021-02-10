@@ -1,4 +1,5 @@
 import { Command } from 'discord-akairo';
+import { MessageAttachment } from 'discord.js';
 import { VoiceChannel } from 'discord.js';
 import { Message } from 'discord.js';
 
@@ -7,16 +8,181 @@ export default class extends Command {
 		super('command_mee69_music_play', {
 			aliases: ['play', 'p'],
 			channel: 'guild',
+			args: [
+				{
+					id: 'search',
+					type: 'string',
+					match: 'rest',
+				},
+			],
 		});
 	}
-	public async exec(message: Message) {
+	public async exec(
+		message: Message,
+		{ search }: { search: string | MessageAttachment },
+	) {
 		if (!message.guild) return 'How the FUCK??';
 		let player = await message.guild.player();
+
+		search = message.attachments.first() || search;
+
+		let chn = message.member?.voice;
+
+		if (!chn || !chn.channelID)
+			return message.util?.send(
+				'Come on, you have to be in a voice channel to use Music Commands.',
+			);
+
 		if (!player) {
 			//Do that set of calculations here i.e. the voice channel check binding to the channel etc.
-			return message.util?.send(
-				'Hey! My devs are still working on this command. you gotta stay tuned!',
+
+			let plr = this.client.music.create({
+				guild: message.guild.id,
+				voiceChannel: chn.channelID,
+				textChannel: message.channel.id,
+				selfDeafen: true,
+			});
+			await plr.connect(); //ik that's not promisified but i still wanna use await because i can.
+			message.util?.send(
+				`Joined \`${message.member?.voice.channel?.name}\` and bound to \`${message.channel}\``,
 			);
+			let res;
+			try {
+				res = await plr.search(
+					search instanceof MessageAttachment ? search.url : search,
+					message.author,
+				);
+
+				if (res.loadType === 'LOAD_FAILED') {
+					if (!plr.queue.current) plr.destroy();
+					throw new Error(res.exception?.message);
+				}
+			} catch (e) {
+				return message.util?.send(
+					'Error while searching: ' + e.message,
+				);
+			}
+
+			switch (res.loadType) {
+				case 'NO_MATCHES':
+					if (!plr.queue.current) plr.destroy();
+					return message.channel.send('No search results found.');
+
+				case 'TRACK_LOADED':
+					plr.queue.add(res.tracks[0]);
+					if (!plr.playing && !plr.paused && !plr.queue.length)
+						plr.play();
+					return message.channel.send(
+						'Queued ' + res.tracks[0].title,
+					);
+
+				case 'PLAYLIST_LOADED':
+					plr.queue.add(res.tracks[0]);
+					if (
+						!plr.playing &&
+						!plr.paused &&
+						plr.queue.size === res.tracks.length
+					)
+						plr.play();
+					let ttl = res.playlist?.name;
+					let emb = this.client.util
+						.embed()
+						.setTitle('🎶 Playlist Loaded 🎶')
+						.addField(
+							'Title',
+							`${
+								(ttl?.length ? ttl.length > 10 : null)
+									? `${ttl?.substring(0, 10)}...`
+									: ttl
+							}`,
+							true,
+						)
+						.setImage(
+							`https://img.youtube.com/vi/${res.tracks[0].identifier}/maxresdefault.jpg`,
+						)
+						.setFooter('Requested by: ' + res.tracks[0].requester);
+					return message.channel.send(emb);
+
+				case 'SEARCH_RESULT':
+					let max = 5;
+					let collected;
+					let filter = (m: Message) =>
+						m.author.id === message.author.id &&
+						/^(\d+|cancel)$/i.test(m.content);
+					if (res.tracks.length < max) max = res.tracks.length;
+
+					let results = res.tracks
+						.slice(0, max)
+						.map(
+							(track, index) => `${++index} - \`${track.title}\``,
+						)
+						.join('\n');
+
+					let e = this.client.util
+						.embed()
+						.setAuthor(
+							`🎶 Result of ${search} 🎶`,
+							'https://cdn.discordapp.com/attachments/713193780932771891/759022257669406800/yt.png',
+						) //Looks like a YT logo or smth to me
+						.setDescription(results)
+						.setFooter(
+							`Requested by: ${message.author.tag} | Type "cancel" to cancel the selection`,
+						);
+					message.channel.send(e);
+					try {
+						collected = await message.channel.awaitMessages(
+							filter,
+							{ max: 1, time: 30e3, errors: ['time'] },
+						);
+					} catch (e) {
+						if (!plr.queue.current) plr.destroy();
+						return message.reply(
+							'You fool you need to actually choose something!',
+						);
+					}
+					let first = collected.first()?.content;
+
+					if (first?.toLowerCase() === 'cancel') {
+						if (!plr.queue.current) plr.destroy();
+						return message.react(':thumbsup:'); //idk if it works like that.
+					}
+
+					var index = Number(first) - 1;
+					if (index < 0 || index > max - 1)
+						return message.reply(
+							"Option `{}` doesn't exist!".replace(
+								'{}',
+								1 - max + '',
+							), //f the rainbow extension, i will have to escpae it and all that. It originally was `Option \`${1-max}\` doesn't exist!`
+						);
+
+					var track = res.tracks[index];
+					plr.queue.add(track);
+
+					if (!plr.playing && !plr.paused && !plr.queue.length)
+						plr.play();
+					return message.util?.send(
+						this.client.util
+							.embed()
+							.setAuthor(
+								`Added Music`,
+								'https://cdn.discordapp.com/attachments/713193780932771891/759022257669406800/yt.png',
+							)
+							.addField(
+								'Title',
+								`[${track.title}](${track.uri})`,
+								true,
+							)
+							.addField(
+								'Requesd by: ',
+								`${track.requester}`,
+								true,
+							)
+							.setImage(
+								`https://img.youtube.com/vi/${track.identifier}/maxresdefault.jpg`,
+							),
+					);
+			}
 		} else {
 			if (player.textChannel) {
 				if (message.channel.id != player.textChannel) return undefined; //this makes it ignore if the channel is not the one that the player is bound to.
