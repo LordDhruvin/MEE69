@@ -1,11 +1,10 @@
 import { Command } from 'discord-akairo';
-import { Role } from 'discord.js';
 import { Message, VoiceChannel } from 'discord.js';
 
 export default class extends Command {
 	public constructor() {
-		super('comand_mee69_skip', {
-			aliases: ['skip', 'fs', 'next-song'],
+		super('comand_mee69_stop', {
+			aliases: ['stop', 'fuck-off'],
 			channel: 'guild',
 		});
 	}
@@ -40,16 +39,9 @@ export default class extends Command {
 					) as VoiceChannel).name,
 				),
 			);
-		if (
-			!message.member?.roles.cache.find((r: Role) => r.name === 'DJ') &&
-			!message.member?.hasPermission('MANAGE_CHANNELS')
-		)
-			return message.channel.send(
-				'You need to either have the "DJ" role or the "Manage Channels" permission to use this command!',
-			);
 
-		player.stop();
+		player.destroy();
 
-		return message.reply('Skipped the song :thumbsup_tone1:');
+		return message.reply(':wave_tone1: Bye Bye');
 	}
 }
