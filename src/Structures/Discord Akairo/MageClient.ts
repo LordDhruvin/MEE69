@@ -195,18 +195,7 @@ export default class MageClient extends AkairoClient {
 					afk: true,
 				},
 				ws: {
-					intents: new Intents().add(
-						'DIRECT_MESSAGES',
-						'GUILDS',
-						'GUILD_BANS',
-						'GUILD_EMOJIS',
-						'GUILD_INTEGRATIONS',
-						'GUILD_INVITES',
-						'GUILD_MEMBERS',
-						'GUILD_MESSAGES',
-						'GUILD_MESSAGE_REACTIONS',
-						'GUILD_WEBHOOKS',
-					),
+					intents: Intents.ALL,
 				},
 			},
 		);
