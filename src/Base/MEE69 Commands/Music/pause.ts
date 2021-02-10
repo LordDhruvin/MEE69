@@ -1,11 +1,10 @@
 import { Command } from 'discord-akairo';
-import { Role } from 'discord.js';
 import { Message, VoiceChannel } from 'discord.js';
 
 export default class extends Command {
 	public constructor() {
-		super('comand_mee69_skip', {
-			aliases: ['skip', 'fs', 'next-song'],
+		super('command_mee69_music_pause', {
+			aliases: ['pause'],
 			channel: 'guild',
 		});
 	}
@@ -14,8 +13,8 @@ export default class extends Command {
 		let player = await message.guild.player();
 
 		if (!player)
-			return message.util?.send(
-				"I can't skip nothing, No song(s) are being played at the moment.",
+			return message.channel.send(
+				"I can't pause nothing,  No song(s) are being played at the moment.",
 			);
 
 		if (player.textChannel) {
@@ -40,16 +39,10 @@ export default class extends Command {
 					) as VoiceChannel).name,
 				),
 			);
-		if (
-			!message.member?.roles.cache.find((r: Role) => r.name === 'DJ') &&
-			!message.member?.hasPermission('MANAGE_CHANNELS')
-		)
-			return message.channel.send(
-				'You need to have the "DJ" role or the "Manage Channels" permission to use this command!',
-			);
 
-		player.stop();
+		let pp = player.paused;
+		player.pause(pp ? false : true);
 
-		return message.reply('Skipped the song :thumbsup_tone1:');
+		return message.reply(`${pp ? '▶️ Playing' : '⏸️ Paused'}`);
 	}
 }
