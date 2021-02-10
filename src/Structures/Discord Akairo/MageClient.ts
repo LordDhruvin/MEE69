@@ -261,8 +261,8 @@ export default class MageClient extends AkairoClient {
 	 * @function
 	 */
 	async start() {
-		await this._init();
 		await this.erela.init();
+		await this._init();
 		return this.login(config.bot.token);
 	}
 }
