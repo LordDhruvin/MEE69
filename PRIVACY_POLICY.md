@@ -13,4 +13,4 @@
 
 * How can user contact me for any issue regarding the code?
 
-> They can contact me on discord after joining my [Discord Server](https://dsc.gg/dhruvin "My discord server").
+> They can contact me on discord after joining [my Discord Server](https://dsc.gg/dhruvin "join here").
