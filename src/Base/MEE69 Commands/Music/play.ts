@@ -197,6 +197,151 @@ export default class extends Command {
 							' channel to play music.',
 					);
 			}
+			let res;
+			try {
+				res = await player.search(
+					search instanceof MessageAttachment ? search.url : search,
+					message.author,
+				);
+
+				if (res.loadType === 'LOAD_FAILED') {
+					if (!player.queue.current) player.destroy();
+					throw new Error(res.exception?.message);
+				}
+			} catch (e) {
+				return message.util?.send(
+					'Error while searching: ' + e.message,
+				);
+			}
+
+			switch (res.loadType) {
+				case 'NO_MATCHES':
+					if (!player.queue.current) player.destroy();
+					return message.channel.send('No search results found.');
+
+				case 'TRACK_LOADED':
+					player.queue.add(res.tracks[0]);
+					if (
+						!player.playing &&
+						!player.paused &&
+						!player.queue.length
+					)
+						player.play();
+					return message.channel.send(
+						'Queued ' + res.tracks[0].title,
+					);
+
+				case 'PLAYLIST_LOADED':
+					player.queue.add(res.tracks[0]);
+					if (
+						!player.playing &&
+						!player.paused &&
+						player.queue.size === res.tracks.length
+					)
+						player.play();
+					let ttl = res.playlist?.name;
+					let emb = this.client.util
+						.embed()
+						.setTitle('🎶 Playlist Loaded 🎶')
+						.addField(
+							'Title',
+							`${
+								(ttl?.length ? ttl.length > 10 : null)
+									? `${ttl?.substring(0, 10)}...`
+									: ttl
+							}`,
+							true,
+						)
+						.setImage(
+							`https://img.youtube.com/vi/${res.tracks[0].identifier}/maxresdefault.jpg`,
+						)
+						.setFooter('Requested by: ' + res.tracks[0].requester);
+					return message.channel.send(emb);
+
+				case 'SEARCH_RESULT':
+					let max = 5;
+					let collected;
+					let filter = (m: Message) =>
+						m.author.id === message.author.id &&
+						/^(\d+|cancel)$/i.test(m.content);
+					if (res.tracks.length < max) max = res.tracks.length;
+
+					let results = res.tracks
+						.slice(0, max)
+						.map(
+							(track, index) => `${++index} - \`${track.title}\``,
+						)
+						.join('\n');
+
+					let e = this.client.util
+						.embed()
+						.setAuthor(
+							`🎶 Result of ${search} 🎶`,
+							'https://cdn.discordapp.com/attachments/713193780932771891/759022257669406800/yt.png',
+						) //Looks like a YT logo or smth to me
+						.setDescription(results)
+						.setFooter(
+							`Requested by: ${message.author.tag} | Type "cancel" to cancel the selection`,
+						);
+					message.channel.send(e);
+					try {
+						collected = await message.channel.awaitMessages(
+							filter,
+							{ max: 1, time: 30e3, errors: ['time'] },
+						);
+					} catch (e) {
+						if (!player.queue.current) player.destroy();
+						return message.reply(
+							'You fool you need to actually choose something!',
+						);
+					}
+					let first = collected.first()?.content;
+
+					if (first?.toLowerCase() === 'cancel') {
+						if (!player.queue.current) player.destroy();
+						return message.react(':thumbsup:'); //idk if it works like that.
+					}
+
+					var index = Number(first) - 1;
+					if (index < 0 || index > max - 1)
+						return message.reply(
+							"Option `{}` doesn't exist!".replace(
+								'{}',
+								1 - max + '',
+							), //f the rainbow extension, i will have to escpae it and all that. It originally was `Option \`${1-max}\` doesn't exist!`
+						);
+
+					var track = res.tracks[index];
+					player.queue.add(track);
+
+					if (
+						!player.playing &&
+						!player.paused &&
+						!player.queue.length
+					)
+						player.play();
+					return message.util?.send(
+						this.client.util
+							.embed()
+							.setAuthor(
+								`Added Music`,
+								'https://cdn.discordapp.com/attachments/713193780932771891/759022257669406800/yt.png',
+							)
+							.addField(
+								'Title',
+								`[${track.title}](${track.uri})`,
+								true,
+							)
+							.addField(
+								'Requesd by: ',
+								`${track.requester}`,
+								true,
+							)
+							.setImage(
+								`https://img.youtube.com/vi/${track.identifier}/maxresdefault.jpg`,
+							),
+					);
+			}
 			return message.util?.send(
 				'Hey! My devs are still working on this command. you gotta stay tuned!',
 			);
