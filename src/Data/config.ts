@@ -12,19 +12,22 @@ import safeconfig from './safe-config';
 export default {
 	bot: {
 		token: process.env.TOKEN || devconfig.bot.token,
-		owners: devconfig.bot.owners || safeconfig.bot.owners,
-		prefix: devconfig.bot.prefix || safeconfig.bot.prefix,
-		bsprefix: devconfig.bot.bsprefix || safeconfig.bot.bsprefix,
-		color: devconfig.bot.color || safeconfig.bot.color,
+		owners: devconfig ? devconfig.bot.owners : safeconfig.bot.owners,
+		prefix: devconfig ? devconfig.bot.prefix : safeconfig.bot.prefix,
+		bsprefix: devconfig ? devconfig.bot.bsprefix : safeconfig.bot.bsprefix,
+		color: devconfig ? devconfig.bot.color : safeconfig.bot.color,
 		logchannels: {
 			error:
-				devconfig.bot.logchannels.error ||
+				devconfig ?
+				devconfig.bot.logchannels.error :
 				safeconfig.bot.logchannels.error,
 			command:
-				devconfig.bot.logchannels.command ||
+				devconfig ?
+				devconfig.bot.logchannels.command :
 				safeconfig.bot.logchannels.command,
 			other:
-				devconfig.bot.logchannels.other ||
+				devconfig ?
+				devconfig.bot.logchannels.other :
 				safeconfig.bot.logchannels.other,
 		},
 	},
