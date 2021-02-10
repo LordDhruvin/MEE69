@@ -46,7 +46,7 @@ export default {
 	},
 	lavalink: {
 		host: process.env.LAVALINK_HOST || devconfig.lavalink.host,
-		port: process.env.LAVALINK_PORT || devconfig.lavalink.port,
+		port: Number(process.env.LAVALINK_PORT) || devconfig.lavalink.port,
 		password: process.env.LAVALINK_PW || devconfig.lavalink.password,
 	},
 };
