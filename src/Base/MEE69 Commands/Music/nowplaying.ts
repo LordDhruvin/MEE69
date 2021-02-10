@@ -4,7 +4,7 @@ import { Message } from 'discord.js';
 export default class extends Command {
 	public constructor() {
 		super('command_mee69_nowplaying', {
-			aliases: ['nowplaying', 'np'],
+			aliases: ['now-playing', 'np'],
 			channel: 'guild',
 		});
 	}
