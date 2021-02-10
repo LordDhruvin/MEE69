@@ -22,7 +22,7 @@ export default class extends Command {
 		}
 
 		if (
-			(message.member?.voice.channelID != player.voiceChannel ||
+			(message.member?.voice.id != player.voiceChannel ||
 				!message.member?.hasPermission('MANAGE_GUILD')) &&
 			player.voiceChannel
 		)

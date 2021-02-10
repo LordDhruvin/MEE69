@@ -29,7 +29,7 @@ export default class extends Command {
 
 		let chn = message.member?.voice;
 
-		if (!chn || !chn.channelID)
+		if (!chn)
 			return message.util?.send(
 				'Come on, you have to be in a voice channel to use Music Commands.',
 			);
@@ -43,7 +43,7 @@ export default class extends Command {
 
 			let plr = this.client.music.create({
 				guild: message.guild.id,
-				voiceChannel: chn.channelID,
+				voiceChannel: chn.id,
 				textChannel: message.channel.id,
 				selfDeafen: true,
 			});
