@@ -9,12 +9,7 @@ export default class extends Command {
 			args: [
 				{
 					id: 'vol',
-					type: Argument.range('number', 0, 101),
-					prompt: {
-						start: 'What do you want the volume to be?',
-						retry:
-							'Come on, it has to be a valid number between 1 to 100',
-					},
+					type: Argument.range('number', 0, 101)
 				},
 			],
 		});
@@ -25,14 +20,21 @@ export default class extends Command {
 		let player = await message.guild.player();
 		if (!player)
 			return message.channel.send(
-				'I cannot change the volume of nothing, No song(s) are being at the moment.',
+				'I cannot change or show the volume of nothing, No song(s) are being at the moment.',
 			);
 
+		let thatvol = player.volume
+
+		if(!vol) return message.channel.send(`The current volume is \`${thatvol}%\` ${thatvol > 50 ? "🔊" : "🔉"}`)
+
+		if(thatvol === vol) return message.channel.send(`You seem like a fool to me trying to change the volume from \`${thatvol}\` to \`${vol}\`.`)
 		vol > 100 ? (vol = 100) : null;
+
+		let thatemote = vol > thatvol ? "🔊" : (vol < thatvol ? "🔉" : "undefined") 
 		player.setVolume(vol);
 
 		return message.channel.send(
-			`Set the volume to \`${vol}\`% :ok_hand_tone1:`,
+			`${thatemote} Set the volume to \`${vol}%\` :ok_hand_tone1:`,
 		);
 	}
 }

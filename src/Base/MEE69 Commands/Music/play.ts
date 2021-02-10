@@ -24,9 +24,11 @@ export default class extends Command {
 		{ search }: { search: string | MessageAttachment },
 	) {
 		if (!message.guild) return 'How the FUCK??';
+
 		let player = await message.guild.player();
 
 		search = message.attachments.first() || search;
+		if(!search) return message.channel.send('You can\'t just search for nothing!')
 
 		let chn
 		message.member?.voice ? { channel: chn } = message.member?.voice : null
