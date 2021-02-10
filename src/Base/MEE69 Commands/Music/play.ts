@@ -36,7 +36,8 @@ export default class extends Command {
 
 		if (
 			!player ||
-			message.member?.roles.cache.find((r: Role) => r.name === 'DJ')
+			message.member?.roles.cache.find((r: Role) => r.name === 'DJ') ||
+			message.member?.hasPermission('MANAGE_CHANNELS')
 		) {
 			//will need another role name here, members with this role can stop a current playing music and start it anywhere they want to.
 
@@ -346,9 +347,6 @@ export default class extends Command {
 							),
 					);
 			}
-			return message.util?.send(
-				'Hey! My devs are still working on this command. you gotta stay tuned!',
-			);
 		}
 	}
 }
