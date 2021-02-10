@@ -21,8 +21,13 @@ export default class extends Command {
 			if (message.channel.id != player.textChannel) return undefined;
 		}
 
+		let chn;
+		message.member?.voice
+			? ({ channel: chn } = message.member?.voice)
+			: null;
+
 		if (
-			(message.member?.voice.id != player.voiceChannel ||
+			(chn?.id != player.voiceChannel ||
 				!message.member?.hasPermission('MANAGE_GUILD')) &&
 			player.voiceChannel
 		)
