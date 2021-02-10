@@ -27,7 +27,8 @@ export default class extends Command {
 
 		search = message.attachments.first() || search;
 
-		let { channel: chn } = message.member?.voice;
+		let chn
+		message.member?.voice ? { channel: chn } = message.member?.voice : null
 
 		if (!chn)
 			return message.util?.send(
