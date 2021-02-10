@@ -50,7 +50,7 @@ export default class extends Command {
 			});
 			await plr.connect(); //ik that's not promisified but i still wanna use await because i can.
 			message.util?.send(
-				`Joined ${message.guild.channels.cache.get(message.member!.voice.id)?.name} and bound to ${message.channel}`,
+				`Joined ${chn} and bound to ${message.channel}`,
 			);
 			let res;
 			try {
