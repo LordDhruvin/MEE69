@@ -1,4 +1,5 @@
 import { Command } from 'discord-akairo';
+import { Role } from 'discord.js';
 import { MessageAttachment } from 'discord.js';
 import { VoiceChannel } from 'discord.js';
 import { Message } from 'discord.js';
@@ -33,8 +34,11 @@ export default class extends Command {
 				'Come on, you have to be in a voice channel to use Music Commands.',
 			);
 
-		if (!player) {
-			//Do that set of calculations here i.e. the voice channel check binding to the channel etc.
+		if (
+			!player ||
+			message.member?.roles.cache.find((r: Role) => r.name === 'DJ')
+		) {
+			//will need another role name here, members with this role can stop a current playing music and start it anywhere they want to.
 
 			let plr = this.client.music.create({
 				guild: message.guild.id,
