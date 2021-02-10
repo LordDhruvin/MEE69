@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 
 export default class extends Listener {
 	public constructor() {
-		super('listener_client_messageReactionRemove', {
+		super('listener_client_messageReactionRemoveAll', {
 			emitter: 'Bot',
 			event: 'messageReactionRemove',
 		});
