@@ -87,6 +87,6 @@ export default {
  * * * * dev-config.ts is to be kept private at all times for the safety of your bot * * * * * * * * * * * * * * * * * *
  * * * * safe-config.ts need not be kept hidden as it has no confidential data * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * * * * Starlist API key is optional due to it being a private api. * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * Starlist API key (new name Brawlify) is optional due to it being a private api. * * * * * * * * * * * * * * * *
  * * * * GitHub API key can be obtained failry easily. * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
