@@ -7,7 +7,7 @@ export default class extends Command {
 		super('command_utility_help', {
 			aliases: ['help'],
 			description: {
-				short: 'Did you just use help command on help command itself?',
+				short: 'Wtf u doing man',
 				hidden: false,
 				usage: '[ Command ]',
 			},

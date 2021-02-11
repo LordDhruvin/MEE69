@@ -16,7 +16,12 @@ export default class extends Command {
 					match: 'rest',
 				},
 			],
-			cooldown: 5 * 1000 //5 seconds
+			description: {
+				short: 'Play a song, tune in some music',
+				usage: '< Song name | Youtube Link | Spotify Link >',
+				hidden: false,
+			},
+			cooldown: 5 * 1000, //5 seconds
 		});
 	}
 	public async exec(
@@ -28,10 +33,13 @@ export default class extends Command {
 		let player = await message.guild.player();
 
 		search = message.attachments.first() || search;
-		if(!search) return message.channel.send('You can\'t just search for nothing!')
+		if (!search)
+			return message.channel.send("You can't just search for nothing!");
 
-		let chn
-		message.member?.voice ? { channel: chn } = message.member?.voice : null
+		let chn;
+		message.member?.voice
+			? ({ channel: chn } = message.member?.voice)
+			: null;
 
 		if (!chn)
 			return message.util?.send(
@@ -39,7 +47,7 @@ export default class extends Command {
 			);
 
 		if (
-			!player/* || 
+			!player /* || 
 			message.member?.roles.cache.find((r: Role) => r.name === 'DJ') ||
 			message.member?.hasPermission('MANAGE_CHANNELS')*/ // i will add a check to see if their channels are the same, if so i will have to skip the step.
 		) {
@@ -52,9 +60,7 @@ export default class extends Command {
 				selfDeafen: true,
 			});
 			await plr.connect(); //ik that's not promisified but i still wanna use await because i can.
-			message.util?.send(
-				`Joined ${chn} and bound to ${message.channel}`,
-			);
+			message.util?.send(`Joined ${chn} and bound to ${message.channel}`);
 			let res;
 			try {
 				res = await plr.search(

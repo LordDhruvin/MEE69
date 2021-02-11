@@ -6,6 +6,10 @@ export default class extends Command {
 		super('comand_mee69_music_stop', {
 			aliases: ['stop', 'fuck-off'],
 			channel: 'guild',
+			description: {
+				short: 'Stops the music',
+				hidden: false
+			}
 		});
 	}
 	public async exec(message: Message) {

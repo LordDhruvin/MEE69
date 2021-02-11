@@ -7,6 +7,10 @@ export default class extends Command {
 		super('comand_mee69_music_skip', {
 			aliases: ['skip', 'fs', 'next-song'],
 			channel: 'guild',
+			description: {
+				short: 'Skip the current song!',
+				hidden: false,
+			},
 		});
 	}
 	public async exec(message: Message) {
@@ -50,6 +54,8 @@ export default class extends Command {
 
 		player.stop();
 
-		return message.reply(':fast_forward: Skipped the song :thumbsup_tone1:');
+		return message.reply(
+			':fast_forward: Skipped the song :thumbsup_tone1:',
+		);
 	}
 }

@@ -6,6 +6,10 @@ export default class extends Command {
 		super('command_mee69_music_pause', {
 			aliases: ['pause'],
 			channel: 'guild',
+			description: {
+				short: 'Pauses the player if not paused and vice-versa',
+				hidden: false,
+			},
 		});
 	}
 	public async exec(message: Message) {

@@ -13,6 +13,11 @@ export default class extends Command {
 					match: 'flag',
 				},
 			],
+			description: {
+				short:
+					'Loop the queue (or the current track *Hint:* *try `--song` flag*)',
+				hidden: false,
+			},
 		});
 	}
 	public async exec(message: Message, { song }: { song: boolean }) {

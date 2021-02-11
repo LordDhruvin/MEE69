@@ -6,6 +6,10 @@ export default class extends Command {
 		super('command_mee69_music_nowplaying', {
 			aliases: ['now-playing', 'np'],
 			channel: 'guild',
+			description: {
+				short: 'View the currently playing song!',
+				hidden: false
+			}
 		});
 	}
 	public async exec(message: Message) {
