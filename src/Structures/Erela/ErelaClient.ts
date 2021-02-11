@@ -1,5 +1,5 @@
 import { Manager, Payload } from 'erela.js';
-import SpotifyClient from 'erela.js-spotify'
+//import SpotifyClient from 'erela.js-spotify'
 import config from '../../Data/config';
 import type MageClient from '../Discord Akairo/MageClient';
 // Most of this is from "Neo-Akairo" (link_coming_soon_no_internet)
@@ -17,11 +17,11 @@ export default class ErelaClient {
 				const guild = this.client.guilds.cache.get(id);
 				if (guild) guild.shard.send(payload);
 			},
-			plugins: [
+			/*plugins: [
 				new SpotifyClient(
 					config.spotify
 				)
-			]
+			]*/
 		});
 	}
 }
