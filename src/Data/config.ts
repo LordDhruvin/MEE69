@@ -29,9 +29,9 @@ export default {
 		},
 	},
 	database: {
-		user: process.env.USER_DB || devconfig ? devconfig.database.user : null,
+		user: process.env.USER_DB || devconfig ? devconfig.database.user : null || null,
 		guild:
-			process.env.GUILD_DB || devconfig ? devconfig.database.guild : null,
+			process.env.GUILD_DB || devconfig ? devconfig.database.guild : null || null,
 	},
 	keys: {
 		supercell: {
