@@ -1,10 +1,10 @@
 /**
  * This is necessary.
  */
-let devconfig
+let devconfig;
 try {
-	devconfig = require('./config-dev')
-	devconfig = devconfig.default
+	devconfig = require('./config-dev');
+	devconfig = devconfig.default;
 } catch (e) {}
 
 import safeconfig from './safe-config';
@@ -17,37 +17,63 @@ export default {
 		bsprefix: devconfig ? devconfig.bot.bsprefix : safeconfig.bot.bsprefix,
 		color: devconfig ? devconfig.bot.color : safeconfig.bot.color,
 		logchannels: {
-			error:
-				devconfig ?
-				devconfig.bot.logchannels.error :
-				safeconfig.bot.logchannels.error,
-			command:
-				devconfig ?
-				devconfig.bot.logchannels.command :
-				safeconfig.bot.logchannels.command,
-			other:
-				devconfig ?
-				devconfig.bot.logchannels.other :
-				safeconfig.bot.logchannels.other,
+			error: devconfig
+				? devconfig.bot.logchannels.error
+				: safeconfig.bot.logchannels.error,
+			command: devconfig
+				? devconfig.bot.logchannels.command
+				: safeconfig.bot.logchannels.command,
+			other: devconfig
+				? devconfig.bot.logchannels.other
+				: safeconfig.bot.logchannels.other,
 		},
 	},
 	database: {
-		user: process.env.USER_DB || devconfig.database.user,
-		guild: process.env.GUILD_DB || devconfig.database.guild,
+		user: process.env.USER_DB || devconfig ? devconfig.database.user : null,
+		guild:
+			process.env.GUILD_DB || devconfig ? devconfig.database.guild : null,
 	},
 	keys: {
 		supercell: {
-			bs: process.env.BS_API_KEY || devconfig.keys.supercell.bs,
-			coc: process.env.COC_API_KEY || devconfig.keys.supercell.coc,
-			cr: process.env.CR_API_KEY || devconfig.keys.supercell.cr,
+			bs:
+				process.env.BS_API_KEY || devconfig
+					? devconfig.keys.supercell.bs
+					: null,
+			coc:
+				process.env.COC_API_KEY || devconfig
+					? devconfig.keys.supercell.coc
+					: null,
+			cr:
+				process.env.CR_API_KEY || devconfig
+					? devconfig.keys.supercell.cr
+					: null,
 		},
-		starlist: process.env.STARLIST_API_KEY || devconfig.keys.starlist,
-		github: process.env.GITHUB_API_KEY || devconfig.keys.github,
+		starlist:
+			process.env.STARLIST_API_KEY || devconfig
+				? devconfig.keys.starlist
+				: null,
+		github:
+			process.env.GITHUB_API_KEY || devconfig
+				? devconfig.keys.github
+				: null,
 	},
 	lavalink: {
-		host: process.env.LAVALINK_HOST || devconfig.lavalink.host,
-		port: Number(process.env.LAVALINK_PORT) || devconfig.lavalink.port,
-		password: process.env.LAVALINK_PW || devconfig.lavalink.password,
+		host:
+			process.env.LAVALINK_HOST || devconfig
+				? devconfig.lavalink.host
+				: null,
+		port:
+			Number(process.env.LAVALINK_PORT) || devconfig
+				? devconfig.lavalink.port
+				: null,
+		password:
+			process.env.LAVALINK_PW || devconfig
+				? devconfig.lavalink.password
+				: null,
+	},
+	spotify: {
+		clientID: process.env.SPOTIFY_ID || devconfig ? devconfig.spotify.clientID : null,
+		clientSecret: process.env.SPOTYIFY_SECRET || devconfig ? devconfig.spotify.clientSecret : null,
 	},
 };
 
