@@ -39,7 +39,7 @@ Hosting on heroku is very easy. All you have to do is fork this repository, make
 -   BS_API_KEY => your brawl stars api key [see this](#getting-api-keys)
 -   COC_API_KEY => your clash of clasn api key [see this](#getting-api-keys)
 -   CR_API_KEY => your clash royale api key [see this](#getting-api-keys)
--   STARLIST_KEY => your starlist api key (optional as private api)
+-   STARLIST_KEY => your starlist (now name changed to brawlify) api key (optional as private api)
 -   GITHUB_API_KEY => your github api key [see this](#getting-api-keys)
 
 5. Change the dyno worker thing to worker (it is web by default)
