@@ -12,7 +12,7 @@ MEE6, but better
         -   [Requirements](#requirements)
         -   [Running the bot](#running-the-bot)
     -   [Changing Files](#creating-and-changing-files)
-    -   [Getting API Keys](#getting-api-keys)
+    -   [Getting API Keys and Other requirments](#getting-api-keys-and-other-requirements)
 -   [Usage](#usage)
 -   [Contributors](#contributors)
 
@@ -85,7 +85,7 @@ Changing Files
 
     **Note:** Do not have any of the env variables (process.env[varaible]) that are shown in [config.ts](Bot/Data/config.ts) or just have them correct as it is how the bot works. (On your host you should have those and are expected to put them not on native pc)
 
-### Getting API Keys
+### Getting API Keys and Other requirements
 
 Supercell:
 
@@ -93,11 +93,24 @@ Supercell:
 2. [Clash Royale](https://developer.clashroyale.com/ 'Official Royale API')
 3. [Clash of Clans](https://developer.clashofclans.com/ 'Official Clash of Clans API')
 
-**Note:** I have used The [Royale API proxy](https://docs.royaleapi.com/#/proxy) and hence you would want to add `128.128.128.128` as an whitelisted IP Address in the above keys in order for this to function properly.
+**Note:** I have used The [Royale API proxy](https://docs.royaleapi.com/#/proxy) and hence you will have to add `128.128.128.128` as an whitelisted IP Address in the above keys in order for this to function properly.
 
 GitHub:
 
 -   [GitHub API Key](https://developer.github.com)
+
+Lavalink:
+
+This needs you to either host a lavalink server or use an exisiting server.
+
+-   [Lavalink](https://google.com/search?q=Lavalink)
+
+Spotify:
+
+This is needed for searching Spotify music tracks and adding them to queue.
+This is an optional requirement.
+
+-   [Spotify](https://developer.spotify.com/dashboard)
 
 ## Usage
 
