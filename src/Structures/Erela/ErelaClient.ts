@@ -10,7 +10,19 @@ export default class ErelaClient {
 	}
 
 	async init() {
-		if (config.spotify) {
+		if(!config.spotify.clientID || !config.spotify.clientSecret) {
+		
+			this.client.music = new Manager({
+				nodes: [config.lavalink],
+				autoPlay: true,
+				send: (id: string, payload: Payload) => {
+					const guild = this.client.guilds.cache.get(id);
+					if (guild) guild.shard.send(payload);
+				},
+			});
+
+		} else {
+
 			this.client.music = new Manager({
 				nodes: [config.lavalink],
 				autoPlay: true,
@@ -20,15 +32,7 @@ export default class ErelaClient {
 				},
 				plugins: [new SpotifyClient(config.spotify)],
 			});
-		} else {
-			this.client.music = new Manager({
-				nodes: [config.lavalink],
-				autoPlay: true,
-				send: (id: string, payload: Payload) => {
-					const guild = this.client.guilds.cache.get(id);
-					if (guild) guild.shard.send(payload);
-				},
-			});
+
 		}
 	}
 }
