@@ -29,51 +29,35 @@ export default {
 		},
 	},
 	database: {
-		user: process.env.USER_DB || devconfig ? devconfig.database.user : null,
+		user: process.env.USER_DB ? process.env.USER_DB : (devconfig ? devconfig.database.user : null),
 		guild:
-			process.env.GUILD_DB || devconfig ? devconfig.database.guild : null,
+			process.env.GUILD_DB ? process.env.GUILD_DB : (devconfig ? devconfig.database.user : null),
 	},
 	keys: {
 		supercell: {
 			bs:
-				process.env.BS_API_KEY || devconfig
-					? devconfig.keys.supercell.bs
-					: null,
+				process.env.BS_API_KEY || devconfig.keys.supercell.bs,
 			coc:
-				process.env.COC_API_KEY || devconfig
-					? devconfig.keys.supercell.coc
-					: null,
+				process.env.COC_API_KEY || devconfig.keys.supercell.coc,
 			cr:
-				process.env.CR_API_KEY || devconfig
-					? devconfig.keys.supercell.cr
-					: null,
+				process.env.CR_API_KEY || devconfig.keys.supercell.cr,
 		},
 		starlist:
-			process.env.STARLIST_API_KEY || devconfig
-				? devconfig.keys.starlist
-				: null,
+			process.env.STARLIST_API_KEY ? process.env.STARLIST_API_KEY : (devconfig ? devconfig.keys.starlist : null),
 		github:
-			process.env.GITHUB_API_KEY || devconfig
-				? devconfig.keys.github
-				: null,
+			process.env.GITHUB_API_KEY || devconfig.keys.github,
 	},
 	lavalink: {
 		host:
-			process.env.LAVALINK_HOST || devconfig
-				? devconfig.lavalink.host
-				: null,
+			process.env.LAVALINK_HOST ? process.env.LAVALINK_HOST : (devconfig ? devconfig.lavalink.host : null),
 		port:
-			Number(process.env.LAVALINK_PORT) || devconfig
-				? devconfig.lavalink.port
-				: null,
+			process.env.LAVALINK_PORT ? Number(process.env.LAVALINK_PORT) : (devconfig ? devconfig.lavalink.port : null),
 		password:
-			process.env.LAVALINK_PW || devconfig
-				? devconfig.lavalink.password
-				: null,
+			process.env.LAVALINK_PW ? process.env.LAVALINK_PW : (devconfig ? devconfig.lavalink.password : null),
 	},
 	spotify: {
-		clientID: process.env.SPOTIFY_ID || devconfig ? devconfig.spotify.clientID : null,
-		clientSecret: process.env.SPOTYIFY_SECRET || devconfig ? devconfig.spotify.clientSecret : null,
+		clientID: process.env.SPOTIFY_ID ? process.env.SPOTIFY_ID : (devconfig ? devconfig.spotify.clientID : null),
+		clientSecret: process.env.SPOTYIFY_SECRET ? process.env.SPOTIFY_SECRET : (devconfig ? devconfig.spotify.clientSecret : null),
 	},
 };
 

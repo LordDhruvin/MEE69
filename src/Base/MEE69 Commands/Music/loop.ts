@@ -15,7 +15,7 @@ export default class extends Command {
 			],
 			description: {
 				short:
-					'Loop the queue (or the current track *Hint:* *try `--song` flag*)',
+					'Loop the queue (or the current track)\nHint: try "--song" flag)',
 				hidden: false,
 			},
 		});
