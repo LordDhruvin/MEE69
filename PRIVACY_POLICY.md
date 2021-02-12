@@ -6,6 +6,9 @@
 * The aim of this project is to solely fulfil my expectation from discord bots.
 
 ## Data Collection
+<!--
+* I store user's discord id, guild id, only when they use a specific command which requires saving them to the database. nothing is saved without a user's intent or if applicable the guild admin's intent.
+-->
 
 * I do not store any data at the moment.
 
