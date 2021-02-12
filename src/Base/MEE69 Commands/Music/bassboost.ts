@@ -1,4 +1,5 @@
 import { Command } from 'discord-akairo';
+import { Role } from 'discord.js';
 import { VoiceChannel } from 'discord.js';
 import { Message } from 'discord.js';
 
@@ -80,6 +81,14 @@ export default class extends Command {
 			m: 'Medium',
 			h: 'High',
 		};
+
+        if (
+			!message.member?.roles.cache.find((r: Role) => r.name === 'DJ') &&
+			!message.member?.hasPermission('MANAGE_CHANNELS')
+		)
+			return message.channel.send(
+				'You need to either have the "DJ" role or the "Manage Channels" permission to use this command!',
+			);
 
 		return message.reply(
 			`the bassboost level has been set to \`${usrfrndly[filter]}\``,
