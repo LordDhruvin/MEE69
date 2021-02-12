@@ -6,4 +6,4 @@ The Basic Bot I made because i was bored
 
 ## v1.0.1
 
-Mage => MEE69
+Mage => MEE69 + Full Music features!
