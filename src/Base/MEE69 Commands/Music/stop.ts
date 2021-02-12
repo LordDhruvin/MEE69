@@ -8,8 +8,8 @@ export default class extends Command {
 			channel: 'guild',
 			description: {
 				short: 'Stops the music',
-				hidden: false
-			}
+				hidden: false,
+			},
 		});
 	}
 	public async exec(message: Message) {
