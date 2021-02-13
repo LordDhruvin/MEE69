@@ -30,6 +30,7 @@ export default class extends Command {
         .setDescription(`${greenddit.data.selftext || '\u200b'}`)
         .setURL(`https://www.reddit.com${greenddit.data.permalink}`)//This EXISTSS??????????
         .setFooter(`👍 ${greenddit.data.ups} 💬 ${greenddit.data.num_comments}`)
+        .setImage(greenddit.url) //add image if exists
 
         return message.util?.send(embed)
         } else if(bluedditres.status === 400){
