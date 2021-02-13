@@ -51,7 +51,7 @@ export default class extends Command {
 
 	public async exec(
 		message: Message,
-		{ code, unsecure }: { code: string; unsecure: string }
+		{ code, unsecure, asynchronous }: { code: string, unsecure: boolean, asynchronous: boolean }
 	) {
 		if (unsecure) {
 			console.log(`Unsecure Evaluation Requested`);
@@ -59,7 +59,7 @@ export default class extends Command {
 
 		try {
 			let evalled = await eval(
-				unsecure ? '(async () => {' + code + '})()' : code
+				asynchronous ? '(async () => {' + code + '})()' : code
 			);
 			if (typeof evalled !== 'string') {
 				evalled = require('util').inspect(evalled);
