@@ -85,15 +85,15 @@ export default class extends Command {
 
 		let rctn = await msg.react('<:Delete:810464113682808832>');
 
-		let filter = (r: MessageReaction, u: User) =>
-			r.emoji.id === '810464113682808832' && u.id === message.author.id;
+		let filter = (_: MessageReaction, u: User) =>
+			/*_.emoji.id === '810464113682808832' && */u.id === message.author.id;
 		try {
-			let delresp = msg.awaitReactions(filter, {
+			let delresp = await msg.awaitReactions(filter, {
 				time: 60 * 1000, //1 minute
 				errors: ['time'],
 			});
 
-			((await delresp).size > 0) ? msg.delete() : rctn.remove();
+			(delresp.size > 0) ? msg.delete() : rctn.remove();
 		} catch (e) {
 			rctn.remove();
 		}
