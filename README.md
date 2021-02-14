@@ -52,7 +52,7 @@ And your bot should be online!
 
 You will need:
 
--   [Node.js](https://nodejs 'Node JS')
+-   [Node.js](https://nodejs.org 'Node JS')
 
 You might want:
 
