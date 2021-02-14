@@ -19,6 +19,7 @@ export default class extends Command {
 				{
 					id: 'del',
 					flag: ['--delete', '--del', '--d'],
+					match: 'flag',
 				},
 				{
 					id: 'code',
@@ -68,7 +69,7 @@ export default class extends Command {
 		embed
 			.setTitle(err ? 'Error' : 'Success')
 			.setDescription(`\`\`\`js\n${resp.substr(0, 2038)}\n\`\`\``)
-			.setColor(err ? 'RED' : 'GREEN')
+			.setColor(err ? 'RED' : 'GREEN');
 
 		if (len >= 2049) {
 			console.log(
@@ -92,7 +93,7 @@ export default class extends Command {
 				errors: ['time'],
 			});
 
-			await delresp ? msg.delete() : rctn.remove();
+			(await delresp) ? msg.delete() : rctn.remove();
 		} catch (e) {
 			rctn.remove();
 		}
