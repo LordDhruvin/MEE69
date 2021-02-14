@@ -77,10 +77,10 @@ export default class extends Command {
 
 		let msg = await message.channel.send(embed);
 
-		let rctn = await msg.react('bin');
+		let rctn = await msg.react('<:Delete:810464113682808832>');
 
 		let filter = (r: MessageReaction, u: User) =>
-			r.emoji.id === 'e.id' && u.id === message.author.id;
+			r.emoji.id === '810464113682808832' && u.id === message.author.id;
 		try {
 			let delresp = await msg.awaitReactions(filter, {
 				time: 60 * 1000, //1 minute
