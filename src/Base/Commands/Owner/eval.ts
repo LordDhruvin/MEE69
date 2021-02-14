@@ -3,6 +3,7 @@
  */
 import { Command } from 'discord-akairo';
 import { Message, MessageReaction, User } from 'discord.js';
+import { inspect } from 'util';
 
 export default class extends Command {
 	public constructor() {
@@ -54,9 +55,12 @@ export default class extends Command {
 			resp = await eval(code);
 		} catch (e) {
 			err = true;
-			resp = e;
+			resp = e.toString();
 		}
 
+		if (typeof resp != 'string') {
+			resp = inspect(resp, { depth: 3 });
+		}
 		if (silent) return;
 
 		let len = `\`\`\`js\n${resp}\n\`\`\``.length;
