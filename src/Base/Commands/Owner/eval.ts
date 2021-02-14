@@ -93,7 +93,7 @@ export default class extends Command {
 				errors: ['time'],
 			});
 
-			(await delresp) ? msg.delete() : rctn.remove();
+			((await delresp).size > 0) ? msg.delete() : rctn.remove();
 		} catch (e) {
 			rctn.remove();
 		}
