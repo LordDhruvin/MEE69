@@ -67,7 +67,8 @@ export default class extends Command {
 
 		embed
 			.setTitle(err ? 'Error' : 'Success')
-			.setDescription(`\`\`\`js\n${resp.substr(0, 2038)}\n\`\`\``);
+			.setDescription(`\`\`\`js\n${resp.substr(0, 2038)}\n\`\`\``)
+			.setColor(err ? 'RED' : 'GREEN')
 
 		if (len >= 2049) {
 			console.log(
