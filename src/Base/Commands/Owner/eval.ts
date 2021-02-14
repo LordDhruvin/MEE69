@@ -2,7 +2,7 @@
  * Taken from discord-bot-template GitHub , I actually loved the look of it.
  */
 import { Command } from 'discord-akairo';
-import { Message, MessageReaction, User } from 'discord.js';
+import { Message } from 'discord.js';
 import { inspect } from 'util';
 
 export default class extends Command {
@@ -84,19 +84,17 @@ export default class extends Command {
 		let msg = await message.channel.send(embed);
 
 		let rctn = await msg.react('<:Delete:810464113682808832>');
-
-		let filter = (_: MessageReaction, u: User) =>
-			/*_.emoji.id === '810464113682808832' && */u.id === message.author.id;
+		let delresp
 		try {
-			let delresp = await msg.awaitReactions(filter, {
+			delresp = await msg.awaitReactions((reaction, user) => reaction.emoji.name === 'Delete' && user.id === message.author.id, {
 				time: 60 * 1000, //1 minute
 				errors: ['time'],
 			});
-
-			(delresp.size > 0) ? msg.delete() : rctn.remove();
 		} catch (e) {
-			rctn.remove();
+			return rctn.remove();
 		}
+
+		return delresp.first()?.message.delete()
 		//TODO: react to the message with a red delete emoji, then await reponse to that emoji and delete this message on that reponse. //needed: Emoji
 	}
 }
