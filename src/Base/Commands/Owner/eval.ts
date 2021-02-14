@@ -88,7 +88,7 @@ export default class extends Command {
 		let filter = (r: MessageReaction, u: User) =>
 			r.emoji.id === '810464113682808832' && u.id === message.author.id;
 		try {
-			let delresp = await msg.awaitReactions(filter, {
+			let delresp = msg.awaitReactions(filter, {
 				time: 60 * 1000, //1 minute
 				errors: ['time'],
 			});
