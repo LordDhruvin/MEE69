@@ -1,7 +1,13 @@
+# Note
+
+This repository has been archived and there will be no further updates given to this bot. The code should mostly still work, however.
+
 # MEE69
 
 MEE6, but better
+
 [Help regarding this can be asked here](https://dsc.gg/dhruvin)
+
 
 # Documentation
 
