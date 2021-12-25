@@ -1,9 +1,1 @@
-# Mage Changelog
-
-## v1.0.0
-
-The Basic Bot I made because i was bored
-
-## v1.0.1
-
-Mage => MEE69 + Full Music features!
+# This file will note the changelogs of releases of MEE69, atm no version is ready to be released.

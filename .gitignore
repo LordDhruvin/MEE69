@@ -1,22 +1,3 @@
-# Files not to be uploaded on GitHub
-
-# Most important
-config-dev.ts
-
-# Unnecessary
 node_modules
-package-lock.json
+config.ts
 dist
-
-# Useless
-Cache
-test
-test.ts
-test.js
-testing.js
-testing.ts
-testing
-test.bat
-
-# NetBeans
-nbproject
