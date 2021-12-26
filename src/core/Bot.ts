@@ -1,6 +1,9 @@
-import type { ClientOptions } from "eris";
-import { Client } from "eris";
 import type { Plugin } from "./plugins/Plugin";
+import type { Promisable } from "./util";
+import type { ClientOptions } from "eris";
+
+import { Client } from "eris";
+import { on } from "events";
 
 export class Bot extends Client {
     public plugins: Map<string, Plugin>;
@@ -11,8 +14,17 @@ export class Bot extends Client {
         this.plugins = new Map();
     }
 
-    public waitFor(event: string) {
-        console.log(event);
+    public async waitFor(
+        event: string,
+        check: (...args: unknown[]) => Promisable<unknown>,
+        listener: (...args: unknown[]) => Promisable<unknown>,
+    ): Promise<void> {
+        for await (const args of on(this, event)) {
+            if (await check(...args)) {
+                await listener(...args);
+                break;
+            }
+        }
     }
 
     public async use(plugin: Plugin) {
