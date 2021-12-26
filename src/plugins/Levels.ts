@@ -17,6 +17,7 @@ export class Levels implements Plugin {
 
     public load() {
         this.bot.on("messageCreate", this.handleMessageCreate);
+        // This will also load commands on the bot of this plugin (i.e. !rank, !levels, etc)
     }
 
     public unload() {
@@ -24,11 +25,13 @@ export class Levels implements Plugin {
             "messageCreate",
             this.handleMessageCreate,
         );
+        // This will also unload commands on the bot of this plugin (i.e. !rank, !levels, etc)
     }
 
     public reload() {
         this.unload();
         this.load();
+        // This will also reload commands on the bot of this plugin (i.e. !rank, !levels, etc)
     }
 
     private async handleMessageCreate(
