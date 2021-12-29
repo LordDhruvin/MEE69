@@ -36,7 +36,7 @@ export class Bot extends Client {
             );
             return;
         }
-        await plugin.init(this);
+        if ("init" in plugin) await plugin.init(this);
         this.plugins.set(plugin.id, plugin);
     }
 }
