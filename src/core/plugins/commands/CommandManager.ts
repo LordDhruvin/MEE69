@@ -14,7 +14,7 @@ export class CommandManager implements PluginManager {
         this.commands = new Set();
     }
 
-    // This will be replaced by message later on so we can fetch the prefix here itself.
+    // This will be replaced by message later on, so we can fetch the prefix here itself.
     parse(raw: string): CommandParseOutput | undefined {
         const lexer = new Lexer(raw).setQuotes([
             ['"', '"'],
@@ -22,7 +22,7 @@ export class CommandManager implements PluginManager {
             ["「", "」"],
         ]);
 
-        const matchPrefix = (prefix: string) => prefix.length;
+        const matchPrefix = (text: string) => text.startsWith(this.prefix) ? this.prefix.length : null;
         const lout = lexer.lexCommand(matchPrefix);
         if (!lout) return;
 
