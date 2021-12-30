@@ -1,13 +1,14 @@
 import type { Bot } from "../..";
-import type { Plugin } from "../..";
+import type { PluginManager } from "../..";
 import type { Command } from "./Command";
 import { Lexer, Parser, prefixedStrategy, Args } from "lexure";
 import { Message } from "eris";
+import { Promisable, readDirRecursivelyAndCall } from "../../util";
 
-export class CommandManager implements Plugin {
+export class CommandManager implements PluginManager {
     public commands: Set<Command>;
     public prefix = "!";
-    public id = "CommandManager";
+    readonly id = "CommandManager";
 
     public constructor(public bot: Bot) {
         this.commands = new Set();
@@ -87,6 +88,39 @@ export class CommandManager implements Plugin {
         if (parsed.command?.condition)
             if (!(await parsed.command?.condition(msg))) return;
         await parsed.command.execute(msg, parsed.args, parsed.largs);
+    }
+
+    public async loadFrom(
+        dir: string,
+        filter: (file: string) => Promisable<boolean>,
+    ) {
+        return await readDirRecursivelyAndCall(
+            dir,
+            filter,
+            this.load,
+        );
+    }
+
+    public async unloadFrom(
+        dir: string,
+        filter: (file: string) => Promisable<boolean>,
+    ) {
+        return await readDirRecursivelyAndCall(
+            dir,
+            filter,
+            this.unload,
+        );
+    }
+
+    public async reloadFrom(
+        dir: string,
+        filter: (file: string) => Promisable<boolean>,
+    ) {
+        return await readDirRecursivelyAndCall(
+            dir,
+            filter,
+            this.reload,
+        );
     }
 }
 
