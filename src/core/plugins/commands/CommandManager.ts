@@ -22,7 +22,8 @@ export class CommandManager implements PluginManager {
             ["「", "」"],
         ]);
 
-        const matchPrefix = (text: string) => text.startsWith(this.prefix) ? this.prefix.length : null;
+        const matchPrefix = (text: string) =>
+            text.startsWith(this.prefix) ? this.prefix.length : null;
         const lout = lexer.lexCommand(matchPrefix);
         if (!lout) return;
 
