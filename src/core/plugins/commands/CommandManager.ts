@@ -1,7 +1,8 @@
-import { Bot } from "../..";
-import { Plugin } from "../..";
-import { Command } from "./Command";
+import type { Bot } from "../..";
+import type { Plugin } from "../..";
+import type { Command } from "./Command";
 import { Lexer, Parser, prefixedStrategy, Args } from "lexure";
+import { Message } from "eris";
 
 export class CommandManager implements Plugin {
     public commands: Set<Command>;
@@ -12,6 +13,7 @@ export class CommandManager implements Plugin {
         this.commands = new Set();
     }
 
+    // This will be replaced by message later on so we can fetch the prefix here itself.
     parse(raw: string): CommandParseOutput | undefined {
         const lexer = new Lexer(raw).setQuotes([
             ['"', '"'],
@@ -66,6 +68,25 @@ export class CommandManager implements Plugin {
         this.unload(command, false);
         this.load(command, false);
         this.bot.emit("CommandManager.COMMAND_RELOADED", command);
+    }
+
+    public init() {
+        this.bot.on("messageCreate", this.handleMessageCreate);
+    }
+
+    public destroy() {
+        this.bot.removeListener(
+            "messageCreate",
+            this.handleMessageCreate,
+        );
+    }
+
+    public async handleMessageCreate(msg: Message) {
+        const parsed = this.parse(msg.content);
+        if (!parsed) return;
+        if (parsed.command?.condition)
+            if (!(await parsed.command?.condition(msg))) return;
+        await parsed.command.execute(msg, parsed.args, parsed.largs);
     }
 }
 
