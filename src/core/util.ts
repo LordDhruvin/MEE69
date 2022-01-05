@@ -14,15 +14,13 @@ export async function readDirRecursivelyAndCall<T = Plugin>(
 ): Promise<boolean> {
     try {
         const files = await readDirRecursively(dir);
-        files
-            .filter(filter)
-            .forEach((file) =>
-                func(
-                    iRequire<T>(resolve(dir, file)),
-                    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-                    file.split(".")[0]!,
-                ),
-            );
+        files.filter(filter).forEach((file) =>
+            func(
+                iRequire<T>(resolve(dir, file)),
+                /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+                file.split(".")[0]!,
+            ),
+        );
         return true;
     } catch {
         return false;

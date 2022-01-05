@@ -4,8 +4,8 @@ import type { ClientOptions } from "eris";
 
 import { Client } from "eris";
 import { on } from "events";
-import {CommandManager} from "../plugins";
-import {ListenerManager} from "../plugins";
+import { CommandManager } from "../plugins";
+import { ListenerManager } from "../plugins";
 
 export class Bot extends Client {
     public plugins: Map<string, Plugin>;

@@ -3,7 +3,10 @@ import type { PluginManager } from "../../core";
 import type { Command } from "./Command";
 import { Lexer, Parser, prefixedStrategy, Args } from "lexure";
 import { Message } from "eris";
-import { Promisable, readDirRecursivelyAndCall } from "../../core/util";
+import {
+    Promisable,
+    readDirRecursivelyAndCall,
+} from "../../core/util";
 
 export class CommandManager implements PluginManager {
     public commands: Set<Command>;
