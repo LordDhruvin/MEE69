@@ -28,12 +28,20 @@ const bot = new Bot(DISCORD_TOKEN);
 bot.listenerManager.load((msg: Message) => {
     console.log(msg.content);
 }, "messageCreate");
-bot.commandManager.loadFrom(
-    join(__dirname, "commands"),
-    (f) => f.endsWith(".js") || f.endsWith(".ts"),
+
+bot.listenerManager.load(
+    () => console.log("Loaded"),
+    "CommandManager.COMMAND_LOADED",
 );
-bot.connect().then(() => {
-    bot.commandManager.init();
-    bot.listenerManager.init();
-    console.log("Done!");
-});
+bot.commandManager
+    .loadFrom(
+        join(__dirname, "commands"),
+        (f) => f.endsWith(".js") || f.endsWith(".ts"),
+    )
+    .then(() => {
+        bot.connect().then(() => {
+            bot.commandManager.init();
+            bot.listenerManager.init();
+            console.log("Done!");
+        });
+    });

@@ -26,15 +26,11 @@ export class CommandManager implements PluginManager {
         const matchPrefix = (text: string) =>
             text.startsWith(this.prefix) ? this.prefix.length : null;
         const lout = lexer.lexCommand(matchPrefix);
-        console.log(lout);
         if (!lout) return;
         const [possibleCommand, getTokens] = lout;
-        // Problem is here
-        const command = Array.from(this.commands.values()).find(
-            (cmd) => {
-                cmd.triggers.includes(possibleCommand.value);
-            },
-        );
+        const command = Array.from(this.commands).find((cmd) => {
+            cmd.triggers.includes(possibleCommand.value);
+        });
         if (!command) return;
         const pout = new Parser(getTokens())
             .setUnorderedStrategy(
