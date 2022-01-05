@@ -4,7 +4,7 @@ import { Args } from "lexure";
 import { Promisable } from "../../core/util";
 
 export interface Command extends Plugin {
-    triggers: string;
+    triggers: string[];
     /**
      * If condition is defined, Command only runs when condition is true.
      */
