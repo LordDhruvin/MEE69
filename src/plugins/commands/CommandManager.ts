@@ -1,13 +1,9 @@
-import type { Bot, PluginManager } from "../../core";
+import type { Bot, Plugin } from "../../core";
 import type { Command } from "./Command";
 import { Args, Lexer, Parser, prefixedStrategy } from "lexure";
-import { Message } from "eris";
-import {
-    Promisable,
-    readDirRecursivelyAndCall,
-} from "../../core/util";
+import type { Message } from "eris";
 
-export class CommandManager implements PluginManager {
+export class CommandManager implements Plugin {
     public commands: Set<Command>;
     public prefix = "!";
     readonly id = "CommandManager";
@@ -88,7 +84,6 @@ export class CommandManager implements PluginManager {
 
     public handleMessageCreate = async (msg: Message) => {
         const output = this.process(msg.content);
-        console.log(output);
         if (!output) return;
         if (output.command?.condition)
             if (!(await output.command?.condition(this.bot, msg)))
@@ -100,39 +95,6 @@ export class CommandManager implements PluginManager {
             output.largs,
         );
     };
-
-    public async loadFrom(
-        dir: string,
-        filter: (file: string) => Promisable<boolean>,
-    ) {
-        return await readDirRecursivelyAndCall(
-            dir,
-            filter,
-            this.load,
-        );
-    }
-
-    public async unloadFrom(
-        dir: string,
-        filter: (file: string) => Promisable<boolean>,
-    ) {
-        return await readDirRecursivelyAndCall(
-            dir,
-            filter,
-            this.unload,
-        );
-    }
-
-    public async reloadFrom(
-        dir: string,
-        filter: (file: string) => Promisable<boolean>,
-    ) {
-        return await readDirRecursivelyAndCall(
-            dir,
-            filter,
-            this.reload,
-        );
-    }
 }
 
 export type CommandParseOutput = {

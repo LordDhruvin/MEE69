@@ -15,33 +15,3 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-// import type { TextableChannel } from "eris";
-
-import { DISCORD_TOKEN } from "./config";
-import { Bot } from "./core";
-import { Message } from "eris";
-import { join } from "path";
-
-const bot = new Bot(DISCORD_TOKEN);
-
-bot.listenerManager.load((msg: Message) => {
-    console.log(msg.content);
-}, "messageCreate");
-
-bot.listenerManager.load(
-    () => console.log("Loaded"),
-    "CommandManager.COMMAND_LOADED",
-);
-bot.commandManager
-    .loadFrom(
-        join(__dirname, "commands"),
-        (f) => f.endsWith(".js") || f.endsWith(".ts"),
-    )
-    .then(() => {
-        bot.connect().then(() => {
-            bot.commandManager.init();
-            bot.listenerManager.init();
-            console.log("Done!");
-        });
-    });

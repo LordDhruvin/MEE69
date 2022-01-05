@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Promisable } from "../util";
+import type { Promisable } from "./util";
 
 /* @note - I cannot use unknown here or it gives errors, same with never so I am being forced to use any. */
 export interface Plugin {

@@ -1,10 +1,7 @@
-import { Bot, PluginManager } from "../../core";
-import {
-    Promisable,
-    readDirRecursivelyAndCall,
-} from "../../core/util";
+import type { Bot, Plugin } from "../../core";
+import type { Promisable } from "../../core/util";
 
-export class ListenerManager implements PluginManager {
+export class ListenerManager implements Plugin {
     public readonly id = "ListenerManager";
 
     public listeners: Map<string, AnyListener>;
@@ -48,17 +45,6 @@ export class ListenerManager implements PluginManager {
         return;
     }
 
-    public async loadFrom(
-        dir: string,
-        filter: (file: string) => Promisable<boolean>,
-    ) {
-        return await readDirRecursivelyAndCall(
-            dir,
-            filter,
-            this.load,
-        );
-    }
-
     reload(listener: AnyListener, filename: string) {
         this.unload(listener, filename, false);
         this.load(listener, filename, false);
@@ -68,17 +54,6 @@ export class ListenerManager implements PluginManager {
             listener,
         );
         return;
-    }
-
-    public async reloadFrom(
-        dir: string,
-        filter: (file: string) => Promisable<boolean>,
-    ) {
-        return await readDirRecursivelyAndCall(
-            dir,
-            filter,
-            this.reload,
-        );
     }
 
     unload(listener: AnyListener, filename: string, _emit = true) {
@@ -96,17 +71,6 @@ export class ListenerManager implements PluginManager {
                 listener,
             );
         return;
-    }
-
-    public async unloadFrom(
-        dir: string,
-        filter: (file: string) => Promisable<boolean>,
-    ) {
-        return await readDirRecursivelyAndCall(
-            dir,
-            filter,
-            this.unload,
-        );
     }
 }
 

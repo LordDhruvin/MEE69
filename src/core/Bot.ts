@@ -1,22 +1,25 @@
-import type { Plugin } from "./plugin";
+import type { Plugin } from "./Plugin";
 import type { Promisable } from "./util";
 import type { ClientOptions } from "eris";
 import { Client } from "eris";
 import { on } from "events";
 import { CommandManager, ListenerManager } from "../plugins";
+import { Logger } from "./Logger";
 
 export class Bot extends Client {
     public plugins: Map<string, Plugin>;
-    public commandManager: CommandManager;
-    public listenerManager: ListenerManager;
+    public logger: Logger;
 
     public constructor(token: string, options?: ClientOptions) {
         super(token, options);
 
-        this.commandManager = new CommandManager(this);
-        this.listenerManager = new ListenerManager(this);
+        this.logger = Logger;
 
         this.plugins = new Map();
+        const commandManager = new CommandManager(this);
+        const listenerManager = new ListenerManager(this);
+        this.plugins.set(commandManager.id, commandManager);
+        this.plugins.set(listenerManager.id, listenerManager);
     }
 
     public async waitFor(

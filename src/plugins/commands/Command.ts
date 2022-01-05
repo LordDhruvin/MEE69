@@ -1,7 +1,7 @@
-import { Bot, Plugin } from "../../core";
+import type { Bot, Plugin } from "../../core";
 import type { Message } from "eris";
 import { Args } from "lexure";
-import { Promisable } from "../../core/util";
+import type { Promisable } from "../../core/util";
 
 /**
  * The Command Class

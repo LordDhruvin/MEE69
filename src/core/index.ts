@@ -1,3 +1,3 @@
 export { Bot } from "./Bot";
 export { Logger } from "./Logger";
-export * from "./plugin";
+export * from "./Plugin";
