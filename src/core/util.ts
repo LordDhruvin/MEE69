@@ -6,19 +6,23 @@ import { resolve } from "path";
 import { readdir } from "fs/promises";
 
 // Can't do anything of that long name because that had to be descriptive
-export async function readDirRecursivelyAndCall<
-    T extends Plugin = Plugin,
->(
+export async function readDirRecursivelyAndCall<T = Plugin>(
     dir: string,
     filter: (file: string) => Promisable<boolean>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    func: (plugin: T) => Promisable<any>,
+    func: (plugin: T, filename: string) => Promisable<any>,
 ): Promise<boolean> {
     try {
         const files = await readDirRecursively(dir);
         files
             .filter(filter)
-            .forEach((file) => func(iRequire<T>(resolve(dir, file))));
+            .forEach((file) =>
+                func(
+                    iRequire<T>(resolve(dir, file)),
+                    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+                    file.split(".")[0]!,
+                ),
+            );
         return true;
     } catch {
         return false;

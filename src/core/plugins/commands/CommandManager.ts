@@ -42,7 +42,7 @@ export class CommandManager implements PluginManager {
         return { command, args: Array.from(args), largs: args };
     }
 
-    public load(command: Command, _emit = true) {
+    public load(command: Command, _filename: unknown, _emit = true) {
         if (this.commands.has(command))
             return this.bot.emit(
                 "CommandManager.COMMAND_ALREADY_LOADED",
@@ -55,7 +55,11 @@ export class CommandManager implements PluginManager {
         return;
     }
 
-    public unload(command: Command, _emit = true) {
+    public unload(
+        command: Command,
+        _filename: unknown,
+        _emit = true,
+    ) {
         if (!this.commands.has(command))
             return this.bot.emit(
                 "CommandManager.COMMAND_NOT_LOADED",
@@ -67,8 +71,8 @@ export class CommandManager implements PluginManager {
     }
 
     public reload(command: Command) {
-        this.unload(command, false);
-        this.load(command, false);
+        this.unload(command, null, false);
+        this.load(command, null, false);
         this.bot.emit("CommandManager.COMMAND_RELOADED", command);
     }
 

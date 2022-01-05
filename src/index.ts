@@ -18,10 +18,10 @@
 
 // import type { TextableChannel } from "eris";
 
-import { Client } from "eris";
-import { token } from "./config";
+import { DISCORD_TOKEN } from "./config";
+import { Bot } from "./core";
 
-const bot = new Client(token);
+const bot = new Bot(DISCORD_TOKEN);
 
 bot.on("messageCreate", (msg) => {
     console.log(msg.content);
