@@ -1,7 +1,7 @@
-import { Plugin } from "../..";
+import { Plugin } from "../../core";
 import type { Message } from "eris";
 import { Args } from "lexure";
-import { Promisable } from "../../util";
+import { Promisable } from "../../core/util";
 
 export interface Command extends Plugin {
     triggers: string;

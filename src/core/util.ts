@@ -1,7 +1,7 @@
 import { statSync } from "fs";
 
 export type Promisable<T> = Promise<T> | T;
-import { Plugin } from "./plugins/Plugin";
+import { Plugin } from "./plugin";
 import { resolve } from "path";
 import { readdir } from "fs/promises";
 

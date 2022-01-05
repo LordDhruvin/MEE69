@@ -1,6 +1,6 @@
-import { PluginManager } from "../PluginManager";
-import { Bot } from "../../Bot";
-import { readDirRecursivelyAndCall, Promisable } from "../../util";
+import { PluginManager } from "../../core";
+import { Bot } from "../../core";
+import { readDirRecursivelyAndCall, Promisable } from "../../core/util";
 
 export class ListenerManager implements PluginManager {
     public readonly id = "ListenerManager";
