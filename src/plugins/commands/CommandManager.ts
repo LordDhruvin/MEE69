@@ -1,7 +1,6 @@
-import type { Bot } from "../../core";
-import type { PluginManager } from "../../core";
+import type { Bot, PluginManager } from "../../core";
 import type { Command } from "./Command";
-import { Lexer, Parser, prefixedStrategy, Args } from "lexure";
+import { Args, Lexer, Parser, prefixedStrategy } from "lexure";
 import { Message } from "eris";
 import {
     Promisable,
@@ -18,21 +17,23 @@ export class CommandManager implements PluginManager {
     }
 
     // This will be replaced by message later on, so we can fetch the prefix here itself.
-    parse(raw: string): CommandParseOutput | undefined {
+    public process(raw: string): CommandParseOutput | undefined {
         const lexer = new Lexer(raw).setQuotes([
             ['"', '"'],
             ["“", "”"],
             ["「", "」"],
         ]);
-
         const matchPrefix = (text: string) =>
             text.startsWith(this.prefix) ? this.prefix.length : null;
         const lout = lexer.lexCommand(matchPrefix);
+        console.log(lout);
         if (!lout) return;
-
         const [possibleCommand, getTokens] = lout;
-        const command = Array.from(this.commands).find((cmd) =>
-            cmd.triggers.includes(possibleCommand.value),
+        // Problem is here
+        const command = Array.from(this.commands.values()).find(
+            (cmd) => {
+                cmd.triggers.includes(possibleCommand.value);
+            },
         );
         if (!command) return;
         const pout = new Parser(getTokens())
@@ -40,7 +41,6 @@ export class CommandManager implements PluginManager {
                 prefixedStrategy(["--", "—"], ["=", ":"]),
             )
             .parse();
-
         const args = new Args(pout);
         return { command, args: Array.from(args), largs: args };
     }
@@ -90,13 +90,20 @@ export class CommandManager implements PluginManager {
         );
     }
 
-    public async handleMessageCreate(msg: Message) {
-        const parsed = this.parse(msg.content);
-        if (!parsed) return;
-        if (parsed.command?.condition)
-            if (!(await parsed.command?.condition(msg))) return;
-        await parsed.command.execute(msg, parsed.args, parsed.largs);
-    }
+    public handleMessageCreate = async (msg: Message) => {
+        const output = this.process(msg.content);
+        console.log(output);
+        if (!output) return;
+        if (output.command?.condition)
+            if (!(await output.command?.condition(this.bot, msg)))
+                return;
+        await output.command.execute(
+            this.bot,
+            msg,
+            output.args,
+            output.largs,
+        );
+    };
 
     public async loadFrom(
         dir: string,

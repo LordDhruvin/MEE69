@@ -1,9 +1,9 @@
 import { statSync } from "fs";
-
-export type Promisable<T> = Promise<T> | T;
 import { Plugin } from "./plugin";
 import { resolve } from "path";
 import { readdir } from "fs/promises";
+
+export type Promisable<T> = Promise<T> | T;
 
 // Can't do anything of that long name because that had to be descriptive
 export async function readDirRecursivelyAndCall<T = Plugin>(
@@ -33,7 +33,7 @@ export async function readDirRecursively(dir: string) {
 
     // WebStorm Warning "Promise returned from forEach argument is ignored" can safely be ignored
     files.forEach(async (file) => {
-        if (statSync(file).isDirectory()) {
+        if (statSync(resolve(dir, file)).isDirectory()) {
             const temp = await readDirRecursively(file);
             res.push(...temp);
         } else {

@@ -31,5 +31,5 @@
         // "noPropertyAccessFromIndexSignature": true,       /* Enforces using indexed accessors for keys declared using an indexed type */
         "skipLibCheck": true /* Skip type checking all .d.ts files. */
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "ignore"]
 }

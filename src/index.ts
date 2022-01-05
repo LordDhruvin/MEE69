@@ -20,9 +20,20 @@
 
 import { DISCORD_TOKEN } from "./config";
 import { Bot } from "./core";
+import { Message } from "eris";
+import { join } from "path";
 
 const bot = new Bot(DISCORD_TOKEN);
 
-bot.on("messageCreate", (msg) => {
+bot.listenerManager.load((msg: Message) => {
     console.log(msg.content);
+}, "messageCreate");
+bot.commandManager.loadFrom(
+    join(__dirname, "commands"),
+    (f) => f.endsWith(".js") || f.endsWith(".ts"),
+);
+bot.connect().then(() => {
+    bot.commandManager.init();
+    bot.listenerManager.init();
+    console.log("Done!");
 });
