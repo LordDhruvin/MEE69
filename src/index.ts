@@ -15,4 +15,38 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-console.log("inDev Testing")
+import { readdir } from "fs/promises";
+import { join } from "path";
+import { DISCORD_TOKEN } from "./config";
+import { Bot } from "./core";
+import { AnyListener, Command } from "./plugins";
+
+export const bot = new Bot(DISCORD_TOKEN);
+
+bot.once("ready", async () => {
+  console.log(`Logged in as ${bot.user.username}`);
+
+  let files = await readdir(join(__dirname, "commands"));
+  files.forEach((f) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    let req = require(join(__dirname, "commands", f));
+
+    if ("default" in req) {
+      req = req.default;
+    }
+
+    bot.commandManager.load(req as Command);
+  });
+
+  files = await readdir(join(__dirname, "events"));
+  files.forEach((f) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    let req = require(join(__dirname, "events", f));
+
+    if ("default" in req) {
+      req = req.default;
+    }
+
+    bot.listenerManager.load(req as AnyListener, f);
+  });
+});

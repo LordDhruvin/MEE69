@@ -1,42 +1,42 @@
 {
-    "name": "mee69",
-    "version": "0.0.0-indev",
-    "private": true,
-    "description": "A discord bot",
-    "main": "dist/index.js",
-    "scripts": {
-        "predev": "npm run lint",
-        "dev": "ts-node src/index.ts",
-        "prestart": "npm run build",
-        "start": "node dist/index.js",
-        "prebuild": "npm run lint",
-        "build": "rimraf dist && tsc",
-        "lint": "eslint --fix --ignore-path .gitignore",
-        "postlint": "npm run format",
-        "format": "prettier --ignore-path .gitignore --write ."
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/MEE69/MEE69.git"
-    },
-    "author": "Dhruvin Purohit",
-    "license": "AGPL-3.0",
-    "homepage": "https://github.com/MEE69/MEE69#readme",
-    "dependencies": {
-        "eris": "^0.16.1",
-        "lexure": "^0.17.0",
-        "tslib": "^2.3.1"
-    },
-    "devDependencies": {
-        "@types/node": "^17.0.4",
-        "@typescript-eslint/parser": "^5.8.1",
-        "@typescript-eslint/eslint-plugin": "^5.8.1",
-        "eslint": "^8.5.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-prettier": "^4.0.0",
-        "prettier": "^2.5.1",
-        "rimraf": "^3.0.2",
-        "ts-node": "^10.4.0",
-        "typescript": "^4.5.4"
-    }
+  "name": "mee69",
+  "version": "0.0.0-indev",
+  "private": true,
+  "description": "A discord bot",
+  "main": "dist/index.js",
+  "scripts": {
+    "predev": "npm run lint",
+    "dev": "ts-node src/index.ts",
+    "prestart": "npm run build",
+    "start": "node dist/index.js",
+    "prebuild": "npm run lint",
+    "build": "rimraf dist && tsc",
+    "lint": "eslint --fix --ignore-path .gitignore",
+    "postlint": "npm run format",
+    "format": "prettier --ignore-path .gitignore --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MEE69/MEE69.git"
+  },
+  "author": "Dhruvin Purohit",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/MEE69/MEE69#readme",
+  "dependencies": {
+    "eris": "^0.16.1",
+    "lexure": "^0.17.0",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.4",
+    "@typescript-eslint/parser": "^5.8.1",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
 }
